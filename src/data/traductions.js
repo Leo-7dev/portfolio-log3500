@@ -32,7 +32,7 @@ export const traductions = {
 
     'equipe.titre': 'Notre équipe',
     'equipe.intro':
-      'Trois étudiants, trois ensembles de tâches complémentaires, un seul dépôt Git.',
+      'Deux étudiants, trois ensembles de tâches complémentaires, un seul dépôt Git.',
     'equipe.competences': 'Compétences',
     'equipe.profilGitHub': 'Profil GitHub',
     'equipe.statsTitre': 'Activité GitHub en direct',
@@ -117,7 +117,7 @@ export const traductions = {
 
     'equipe.titre': 'Our team',
     'equipe.intro':
-      'Three students, three complementary task sets, a single Git repository.',
+      'Two students, three complementary task sets, a single Git repository.',
     'equipe.competences': 'Skills',
     'equipe.profilGitHub': 'GitHub profile',
     'equipe.statsTitre': 'Live GitHub activity',
