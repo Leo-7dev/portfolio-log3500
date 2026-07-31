@@ -1,0 +1,28 @@
+{
+  "name": "portfolio-log3500",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portfolio Professionnel Dynamique Full-Stack - LOG3500 - ISTEAH - Ete 2026",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "vite build",
+    "dev": "vite",
+    "dev:server": "node server.js",
+    "test:serveur": "node --test serveur/validation.test.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.8"
+  }
+}

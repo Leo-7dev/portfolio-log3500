@@ -1,0 +1,291 @@
+/* ==========================================================================
+   layout.css — Gabarit general : entete, navigation, sections, grilles, pied
+   Mise en page realisee exclusivement en Flexbox et CSS Grid (aucun framework).
+   ========================================================================== */
+
+.enveloppe-application {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.conteneur {
+  width: 100%;
+  max-width: var(--largeur-conteneur);
+  margin: 0 auto;
+  padding: 0 var(--espace-m);
+}
+
+.conteneur--etroit {
+  max-width: var(--largeur-conteneur-etroit);
+}
+
+/* ------------------------------- Entete --------------------------------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--couleur-surface);
+  border-bottom: 1px solid var(--couleur-bordure);
+  box-shadow: var(--ombre-basse);
+}
+
+.entete__interieur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-s);
+  padding-top: var(--espace-s);
+  padding-bottom: var(--espace-s);
+}
+
+.entete__marque {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-s);
+  text-decoration: none;
+  color: inherit;
+}
+
+.entete__logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rayon-m);
+  background-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+  font-family: var(--police-monospace);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.entete__textes {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.entete__titre {
+  font-weight: 700;
+}
+
+.entete__sous-titre {
+  font-size: 0.8rem;
+  color: var(--couleur-texte-discret);
+}
+
+.entete__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-s);
+  cursor: pointer;
+}
+
+.entete__barre {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--couleur-texte);
+}
+
+/* ----------------------------- Navigation -------------------------------- */
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-m);
+}
+
+.navigation__liste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-xs);
+}
+
+.navigation__lien {
+  display: inline-block;
+  padding: var(--espace-xs) var(--espace-s);
+  border-radius: var(--rayon-s);
+  color: var(--couleur-texte);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navigation__lien:hover {
+  background-color: var(--couleur-surface-appuyee);
+  color: var(--couleur-texte);
+}
+
+.navigation__lien--actif {
+  color: var(--couleur-accent);
+  background-color: var(--couleur-surface-appuyee);
+}
+
+.preferences {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-xs);
+}
+
+/* ------------------------------ Sections --------------------------------- */
+
+.contenu-principal {
+  flex: 1 1 auto;
+}
+
+.section {
+  padding: var(--espace-xl) 0;
+}
+
+.section--alternee {
+  background-color: var(--couleur-fond-alterne);
+}
+
+.section__titre {
+  margin-bottom: var(--espace-s);
+}
+
+.section__sous-titre {
+  margin-top: var(--espace-l);
+  margin-bottom: var(--espace-xs);
+  font-size: 1.25rem;
+}
+
+.section__introduction {
+  max-width: 68ch;
+  color: var(--couleur-texte-discret);
+  margin-bottom: var(--espace-l);
+}
+
+.section__introduction--discrete {
+  font-size: 0.92rem;
+  margin-bottom: var(--espace-m);
+}
+
+/* ------------------------------ Banniere --------------------------------- */
+
+.banniere {
+  padding: var(--espace-xl) 0;
+  background-color: var(--couleur-fond-alterne);
+  background-image: radial-gradient(
+    circle at 15% 20%,
+    var(--couleur-voile-accent),
+    rgba(0, 0, 0, 0) 55%
+  );
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.banniere__interieur {
+  max-width: 74ch;
+}
+
+.banniere__surtitre {
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--couleur-accent);
+  margin-bottom: var(--espace-xs);
+}
+
+.banniere__texte {
+  font-size: 1.06rem;
+  color: var(--couleur-texte-discret);
+  margin-bottom: var(--espace-m);
+}
+
+.banniere__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-s);
+}
+
+/* ------------------------------- Grilles --------------------------------- */
+
+.grille {
+  display: grid;
+  gap: var(--espace-m);
+}
+
+.grille--trois {
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+}
+
+.grille--projets {
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+}
+
+.grille--membres {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.grille--chiffres {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* -------------------------------- Pied ----------------------------------- */
+
+.pied {
+  margin-top: auto;
+  padding: var(--espace-l) 0;
+  background-color: var(--couleur-surface);
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.pied__ligne {
+  margin-bottom: var(--espace-xs);
+}
+
+.pied__ligne--discrete {
+  color: var(--couleur-texte-discret);
+  font-size: 0.88rem;
+}
+
+/* --------------------- Adaptation aux formats mobiles -------------------- */
+
+@media (max-width: 760px) {
+  .entete__hamburger {
+    display: flex;
+  }
+
+  .navigation {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espace-s);
+    padding-top: var(--espace-s);
+  }
+
+  .navigation--ouverte {
+    display: flex;
+  }
+
+  .navigation__liste {
+    flex-direction: column;
+  }
+
+  .navigation__lien {
+    display: block;
+    padding: var(--espace-s);
+  }
+
+  .preferences {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .section {
+    padding: var(--espace-l) 0;
+  }
+}

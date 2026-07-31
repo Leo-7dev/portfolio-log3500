@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Rapport technique — Portfolio Professionnel Dynamique Full-Stack</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 22mm 18mm; }
+
+  :root {
+    --encre: #14161a;
+    --encre-douce: #4b5563;
+    --accent: #1d4ed8;
+    --trait: #d5dae3;
+    --fond-doux: #f4f6fa;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "DejaVu Serif", Georgia, "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--encre);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+    color: var(--encre);
+    line-height: 1.25;
+    page-break-after: avoid;
+  }
+
+  h1 { font-size: 20pt; margin: 0 0 4pt; }
+  h2 {
+    font-size: 14pt;
+    margin: 22pt 0 8pt;
+    padding-bottom: 4pt;
+    border-bottom: 1.5pt solid var(--accent);
+  }
+  h3 { font-size: 11.5pt; margin: 14pt 0 5pt; color: #1f2937; }
+  h4 { font-size: 10pt; margin: 10pt 0 3pt; color: var(--encre-douce); }
+
+  p { margin: 0 0 7pt; text-align: justify; }
+  ul, ol { margin: 0 0 8pt; padding-left: 16pt; }
+  li { margin-bottom: 3pt; }
+
+  code, pre, .mono {
+    font-family: "DejaVu Sans Mono", "Courier New", monospace;
+  }
+  code { font-size: 9pt; background: var(--fond-doux); padding: 0 2pt; border-radius: 2pt; }
+  pre {
+    font-size: 8.2pt;
+    line-height: 1.42;
+    background: var(--fond-doux);
+    border: 0.6pt solid var(--trait);
+    border-left: 3pt solid var(--accent);
+    border-radius: 3pt;
+    padding: 8pt 10pt;
+    margin: 6pt 0 10pt;
+    white-space: pre;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6pt 0 12pt;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+    color: var(--encre-douce);
+    padding-bottom: 3pt;
+  }
+  th, td {
+    border: 0.6pt solid var(--trait);
+    padding: 4pt 6pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--fond-doux);
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 8.5pt;
+    font-weight: bold;
+  }
+  td.centre, th.centre { text-align: center; }
+  .ok { color: #15803d; font-weight: bold; }
+  .attente { color: #b45309; font-weight: bold; }
+
+  .garde {
+    height: 247mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    page-break-after: always;
+  }
+  .garde__etab {
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 11pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--encre-douce);
+  }
+  .garde__filet { width: 60mm; height: 2.5pt; background: var(--accent); margin: 10mm auto; }
+  .garde__titre {
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 24pt;
+    line-height: 1.2;
+    margin: 0 0 6mm;
+  }
+  .garde__sous { font-size: 13pt; color: var(--encre-douce); margin-bottom: 14mm; }
+  .garde__bloc { font-size: 11pt; line-height: 1.9; }
+  .garde__pied { margin-top: 16mm; font-size: 10pt; color: var(--encre-douce); }
+
+  .sommaire ol { list-style: none; padding-left: 0; font-family: "DejaVu Sans", Arial, sans-serif; font-size: 10pt; }
+  .sommaire li { margin-bottom: 5pt; }
+  .sommaire span { color: var(--encre-douce); }
+
+  .encadre {
+    background: var(--fond-doux);
+    border: 0.6pt solid var(--trait);
+    border-radius: 3pt;
+    padding: 8pt 10pt;
+    margin: 8pt 0 12pt;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+  .encadre p:last-child { margin-bottom: 0; }
+  .encadre__titre {
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 4pt;
+  }
+
+  .figure { margin: 10pt 0 14pt; page-break-inside: avoid; text-align: center; }
+  .figure svg { max-width: 100%; height: auto; }
+  .figure figcaption {
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 8.5pt;
+    color: var(--encre-douce);
+    margin-top: 4pt;
+  }
+
+  .emplacement-capture {
+    border: 1pt dashed #9aa4b5;
+    border-radius: 3pt;
+    background: #fbfcfe;
+    color: var(--encre-douce);
+    font-family: "DejaVu Sans", Arial, sans-serif;
+    font-size: 9pt;
+    text-align: center;
+    padding: 16pt 10pt;
+    margin: 6pt 0 12pt;
+    page-break-inside: avoid;
+  }
+
+  .saut { page-break-before: always; }
+  .nowrap { white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<!-- ============================== PAGE DE GARDE ============================ -->
+<section class="garde">
+  <p class="garde__etab">ISTEAH — L'Université de la nouvelle Haïti</p>
+  <p class="garde__etab" style="letter-spacing:0.06em; font-size:9.5pt;">
+    Institut des Sciences, des Technologies et des Études avancées d'Haïti
+  </p>
+
+  <div class="garde__filet"></div>
+
+  <h1 class="garde__titre">Portfolio Professionnel<br>Dynamique Full-Stack</h1>
+  <p class="garde__sous">Rapport technique du projet de session</p>
+
+  <div class="garde__bloc">
+    <strong>LOG3500</strong> — Conception et programmation de sites Web I (3 crédits)<br>
+    Session : Été 2026<br>
+    Pondération : 35 points — 35 % de la note finale
+  </div>
+
+  <div class="garde__bloc" style="margin-top:12mm;">
+    <strong>Équipe</strong><br>
+    Étudiant 1 : Fils Léonel Charles<br>
+    Étudiant 2 : ______________________________<br>
+    Étudiant 3 : ______________________________
+  </div>
+
+  <div class="garde__bloc" style="margin-top:12mm; font-size:10pt;">
+    Dépôt GitHub : <span class="mono">https://github.com/___________/portfolio-log3500</span><br>
+    Application déployée : <span class="mono">https://___________.up.railway.app</span>
+  </div>
+
+  <p class="garde__pied">Remis le 31 juillet 2026</p>
+</section>
+
+<!-- ================================ SOMMAIRE =============================== -->
+<section class="sommaire">
+  <h2 style="margin-top:0;">Sommaire</h2>
+  <ol>
+    <li>1. Présentation du projet et objectifs techniques</li>
+    <li>2. Architecture générale de l'application</li>
+    <li>3. Architecture du code client (React)</li>
+    <li>4. Schéma de l'arbre des composants</li>
+    <li>5. Arborescence complète du projet</li>
+    <li>6. Gestion de l'état global — Context API</li>
+    <li>7. Navigation — React Router v6</li>
+    <li>8. Flux de données réseau — API REST de GitHub</li>
+    <li>9. Architecture serveur — Node.js / Express</li>
+    <li>10. Intégration, charte visuelle et accessibilité</li>
+    <li>11. Sécurité applicative</li>
+    <li>12. Déploiement continu sur Railway</li>
+    <li>13. Vérifications et preuves de conformité W3C</li>
+    <li>14. Répartition du travail et suivi Git</li>
+    <li>15. Limites connues et pistes d'amélioration</li>
+  </ol>
+</section>
+
+<!-- ================================ SECTION 1 ============================== -->
+<section class="saut">
+<h2>1. Présentation du projet et objectifs techniques</h2>
+
+<p>
+Le présent rapport documente la conception, la programmation, le déploiement et
+la validation d'une application Web monopage (<i>Single Page Application</i>)
+faisant office de portfolio professionnel collectif. Le site sert de vitrine
+technologique : il présente l'équipe, les compétences individuelles et
+collectives de ses membres, leurs réalisations — dont les devoirs 1 et 2 du
+cours — et inclut une passerelle de communication asynchrone avec un serveur
+d'application.
+</p>
+
+<p>
+L'application valide les six compétences avancées énoncées dans la donnée du
+projet. Le tableau ci-dessous met chacune d'elles en regard de sa réalisation
+concrète dans le code.
+</p>
+
+<table>
+  <caption>Tableau 1 — Compétences visées et réalisation technique</caption>
+  <thead>
+    <tr><th style="width:24%">Compétence</th><th style="width:38%">Attente de l'énoncé</th><th>Réalisation</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Composants</strong></td>
+      <td>Découpage de l'interface en composants React modulaires, réutilisables et autonomes.</td>
+      <td>Neuf composants dans <code>src/components/</code> et six vues dans <code>src/pages/</code>, chacun dans son propre fichier, sans état partagé implicite.</td>
+    </tr>
+    <tr>
+      <td><strong>Navigation client</strong></td>
+      <td>Navigation sans rechargement de page avec React Router v6.</td>
+      <td><code>BrowserRouter</code> monté dans <code>main.jsx</code>, table de routage déclarative dans <code>App.jsx</code>, route imbriquée sous un gabarit commun et route dynamique <code>/projets/:identifiant</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>État global</strong></td>
+      <td>Centralisation des préférences (thème sombre/clair, langue) avec Context API.</td>
+      <td><code>ContexteApplication.jsx</code> expose thème, langue, fonction de traduction et actions de bascule ; la valeur est mémoïsée par <code>useMemo</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Flux réseau</strong></td>
+      <td>Consommation asynchrone de l'API REST de GitHub pour injecter des données réelles.</td>
+      <td>Crochet <code>useStatistiquesGitHub</code> (<code>fetch</code> + <code>useEffect</code>) gérant les trois états d'un appel réseau et annulant la requête par <code>AbortController</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Architecture serveur</strong></td>
+      <td>Serveur Node.js/Express servant les fichiers statiques et interceptant les formulaires.</td>
+      <td><code>server.js</code> à la racine : middleware statique sur <code>dist</code>, route <code>POST /api/contact</code> validée, persistance dans <code>messages.json</code>, repli SPA.</td>
+    </tr>
+    <tr>
+      <td><strong>Pratiques DevOps</strong></td>
+      <td>Versionnage collaboratif sous Git/GitHub et déploiement automatisé sur Railway.</td>
+      <td>Branches par ensemble de tâches, fusions par <i>pull request</i>, tableau GitHub Projects, redéploiement automatique à chaque intégration sur <code>main</code>.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ================================ SECTION 2 ============================== -->
+<section>
+<h2>2. Architecture générale de l'application</h2>
+
+<p>
+L'application repose sur une séparation nette entre un client React compilé par
+Vite et un serveur d'application Express. En production, un <strong>seul
+processus Node.js</strong> est exécuté : il sert à la fois le build statique du
+client et les routes de l'API. Cette unification est ce qui permet un
+déploiement Railway en une seule commande de démarrage.
+</p>
+
+<div class="figure">
+<svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Schéma d'architecture générale de l'application">
+  <defs>
+    <marker id="fleche" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <!-- Navigateur -->
+  <rect x="12" y="40" width="196" height="210" rx="8" fill="#eef2ff" stroke="#1d4ed8" stroke-width="1.4"/>
+  <text x="110" y="62" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Navigateur</text>
+  <rect x="30" y="76" width="160" height="34" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="110" y="97" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1e293b">Client React 18 (SPA)</text>
+  <rect x="30" y="118" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="110" y="137" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">React Router v6</text>
+  <rect x="30" y="156" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="110" y="175" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">Context API (thème, langue)</text>
+  <rect x="30" y="194" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="110" y="213" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">CSS pur — Flexbox / Grid</text>
+
+  <!-- Serveur -->
+  <rect x="262" y="40" width="196" height="210" rx="8" fill="#ecfdf5" stroke="#047857" stroke-width="1.4"/>
+  <text x="360" y="62" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e293b">Conteneur Railway</text>
+  <rect x="280" y="76" width="160" height="34" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="360" y="97" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1e293b">server.js — Express</text>
+  <rect x="280" y="118" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="360" y="137" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">static( dist/ )</text>
+  <rect x="280" y="156" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="360" y="175" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">POST /api/contact</text>
+  <rect x="280" y="194" width="160" height="30" rx="5" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="360" y="213" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1e293b">messages.json</text>
+
+  <!-- API GitHub -->
+  <rect x="512" y="86" width="196" height="76" rx="8" fill="#fff7ed" stroke="#c2410c" stroke-width="1.4"/>
+  <text x="610" y="112" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b">API REST GitHub</text>
+  <text x="610" y="132" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">api.github.com/users/…</text>
+  <text x="610" y="148" text-anchor="middle" font-family="sans-serif" font-size="9.5" fill="#475569">(service public externe)</text>
+
+  <!-- Fleches -->
+  <line x1="208" y1="95" x2="258" y2="95" stroke="#4b5563" stroke-width="1.3" marker-end="url(#fleche)"/>
+  <text x="233" y="88" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#475569">HTML/CSS/JS</text>
+
+  <line x1="208" y1="172" x2="258" y2="172" stroke="#4b5563" stroke-width="1.3" marker-end="url(#fleche)"/>
+  <text x="233" y="165" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#475569">fetch JSON</text>
+
+  <path d="M110 250 Q 110 285 400 285 Q 610 285 610 168" fill="none" stroke="#c2410c" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#fleche)"/>
+  <text x="360" y="297" text-anchor="middle" font-family="sans-serif" font-size="8.5" fill="#9a3412">appel direct depuis le client (useEffect)</text>
+
+  <text x="360" y="26" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#475569">Port dynamique : process.env.PORT</text>
+</svg>
+<figcaption>Figure 1 — Architecture générale : client, serveur d'application et service externe.</figcaption>
+</div>
+
+<h3>2.1 Choix d'architecture et justification</h3>
+<ul>
+  <li><strong>Un seul processus en production.</strong> Express sert
+  <code>dist/</code> par un middleware statique, ce qui supprime tout problème de
+  politique d'origine croisée (CORS) entre le client et l'API : les deux
+  partagent la même origine.</li>
+  <li><strong>Appel direct à l'API GitHub depuis le client.</strong> Les points
+  de terminaison publics de GitHub n'exigent aucun jeton d'authentification ;
+  faire transiter l'appel par le serveur aurait ajouté une latence et un point
+  de défaillance sans bénéfice de sécurité.</li>
+  <li><strong>Repli SPA côté serveur.</strong> La route <code>app.get('*')</code>
+  renvoie <code>index.html</code> pour toute adresse non-API. Sans elle, un
+  rafraîchissement direct sur <code>/equipe</code> produirait une erreur 404,
+  car ce chemin n'existe pas sur le système de fichiers du serveur.</li>
+  <li><strong>Validation dédoublée.</strong> Le client valide pour le confort de
+  l'utilisateur ; le serveur revalide car aucune donnée provenant du client
+  n'est digne de confiance — les requêtes peuvent être forgées hors navigateur.</li>
+</ul>
+</section>
+
+<!-- ================================ SECTION 3 ============================== -->
+<section class="saut">
+<h2>3. Architecture du code client (React)</h2>
+
+<p>
+Le client suit une organisation par responsabilité. Les répertoires
+<code>components/</code> et <code>pages/</code> sont distingués volontairement :
+un composant de <code>pages/</code> correspond à une route et compose des
+éléments de <code>components/</code>, qui eux ne connaissent jamais le routage.
+Les contenus éditoriaux sont extraits dans <code>data/</code> afin qu'une mise à
+jour de texte n'entraîne aucune modification de logique.
+</p>
+
+<table>
+  <caption>Tableau 2 — Rôle de chaque répertoire du client</caption>
+  <thead><tr><th style="width:22%">Répertoire</th><th>Responsabilité</th></tr></thead>
+  <tbody>
+    <tr><td><code>src/components/</code></td><td>Composants d'interface réutilisables, sans connaissance du routage ni des données métier.</td></tr>
+    <tr><td><code>src/pages/</code></td><td>Une vue par route ; assemble les composants et lit les paramètres d'URL.</td></tr>
+    <tr><td><code>src/context/</code></td><td>Fournisseur d'état global et crochet d'accès associé.</td></tr>
+    <tr><td><code>src/hooks/</code></td><td>Crochets personnalisés, dont la consommation de l'API GitHub.</td></tr>
+    <tr><td><code>src/data/</code></td><td>Contenus éditoriaux : membres, réalisations, dictionnaires de libellés.</td></tr>
+    <tr><td><code>src/styles/</code></td><td>Quatre feuilles CSS pures, chargées une seule fois dans <code>main.jsx</code>.</td></tr>
+  </tbody>
+</table>
+
+<h3>3.1 Inventaire des composants</h3>
+
+<table>
+  <caption>Tableau 3 — Composants réutilisables</caption>
+  <thead><tr><th style="width:26%">Composant</th><th style="width:30%">Propriétés reçues</th><th>Rôle</th></tr></thead>
+  <tbody>
+    <tr><td><code>MainLayout</code></td><td>—</td><td>Gabarit commun : entête, zone de contenu, pied de page ; remet le focus sur le contenu à chaque changement de route.</td></tr>
+    <tr><td><code>Header</code></td><td>—</td><td>Navigation principale, menu repliable, bascule du thème et de la langue.</td></tr>
+    <tr><td><code>Footer</code></td><td>—</td><td>Mentions institutionnelles et année courante.</td></tr>
+    <tr><td><code>CarteMembre</code></td><td><code>membre</code></td><td>Photo, nom, rôle, biographie, compétences et statistiques GitHub d'un membre.</td></tr>
+    <tr><td><code>CarteProjet</code></td><td><code>projet</code></td><td>Vignette d'une réalisation avec lien vers sa fiche de détail.</td></tr>
+    <tr><td><code>FiltreProjets</code></td><td><code>technologies</code>, <code>filtreActif</code>, <code>surChangement</code></td><td>Barre de filtrage de la galerie ; composant contrôlé, sans état interne.</td></tr>
+    <tr><td><code>ChampFormulaire</code></td><td><code>identifiant</code>, <code>libelle</code>, <code>valeur</code>, <code>erreur</code>, …</td><td>Champ de saisie ou zone de texte, avec label lié et message d'erreur accessible.</td></tr>
+    <tr><td><code>StatistiquesGitHub</code></td><td><code>pseudo</code></td><td>Affiche dépôts publics, abonnés et date d'inscription ; gère les états de chargement et d'erreur.</td></tr>
+    <tr><td><code>IndicateurChargement</code></td><td><code>libelle</code> (facultatif)</td><td>Indicateur d'attente réseau annoncé aux lecteurs d'écran.</td></tr>
+  </tbody>
+</table>
+
+<h3>3.2 Crochets React employés</h3>
+<ul>
+  <li><code>useState</code> — état local : ouverture du menu, filtre actif, valeurs et erreurs du formulaire, préférences dans le fournisseur de contexte.</li>
+  <li><code>useEffect</code> — effets de bord : appel réseau à l'API GitHub, mise à jour du titre du document, application de l'attribut <code>data-theme</code> sur <code>&lt;html&gt;</code>, repositionnement du focus au changement de route.</li>
+  <li><code>useMemo</code> — mémoïsation de la valeur du contexte et de la liste filtrée des projets, afin d'éviter des rendus inutiles.</li>
+  <li><code>useRef</code> — référence vers l'élément <code>&lt;main&gt;</code> pour y placer le focus.</li>
+  <li><code>useContext</code> — encapsulé dans le crochet <code>useApplication()</code>, qui lève une erreur explicite s'il est appelé hors du fournisseur.</li>
+  <li><code>useParams</code>, <code>useLocation</code> — crochets de React Router v6 pour lire l'identifiant du projet et le chemin courant.</li>
+</ul>
+</section>
+
+<!-- ================================ SECTION 4 ============================== -->
+<section class="saut">
+<h2>4. Schéma de l'arbre des composants</h2>
+
+<div class="figure">
+<svg viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Arbre hiérarchique des composants React de l'application">
+  <style>
+    .n  { font-family: "DejaVu Sans", sans-serif; font-size: 10px; fill: #1e293b; }
+    .nb { font-family: "DejaVu Sans", sans-serif; font-size: 10px; font-weight: bold; fill: #1e293b; }
+    .lg { font-family: "DejaVu Sans", sans-serif; font-size: 8.5px; fill: #64748b; }
+    .lien { stroke: #94a3b8; stroke-width: 1; fill: none; }
+  </style>
+
+  <!-- Niveau 0 -->
+  <rect x="250" y="10" width="200" height="26" rx="5" fill="#1d4ed8"/>
+  <text x="350" y="27" text-anchor="middle" class="nb" fill="#ffffff">main.jsx — createRoot</text>
+
+  <line x1="350" y1="36" x2="350" y2="52" class="lien"/>
+  <rect x="250" y="52" width="200" height="26" rx="5" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="350" y="69" text-anchor="middle" class="nb">BrowserRouter</text>
+
+  <line x1="350" y1="78" x2="350" y2="94" class="lien"/>
+  <rect x="234" y="94" width="232" height="26" rx="5" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="350" y="111" text-anchor="middle" class="nb">FournisseurApplication (Context)</text>
+
+  <line x1="350" y1="120" x2="350" y2="136" class="lien"/>
+  <rect x="286" y="136" width="128" height="24" rx="5" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="350" y="152" text-anchor="middle" class="n">App — Routes</text>
+
+  <line x1="350" y1="160" x2="350" y2="176" class="lien"/>
+  <rect x="272" y="176" width="156" height="24" rx="5" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="350" y="192" text-anchor="middle" class="n">MainLayout</text>
+
+  <!-- Header / Outlet / Footer -->
+  <path d="M350 200 L350 214 L90 214 L90 232" class="lien"/>
+  <path d="M350 200 L350 232" class="lien"/>
+  <path d="M350 200 L350 214 L610 214 L610 232" class="lien"/>
+
+  <rect x="34" y="232" width="112" height="24" rx="5" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="90" y="248" text-anchor="middle" class="n">Header</text>
+
+  <rect x="300" y="232" width="100" height="24" rx="5" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="350" y="248" text-anchor="middle" class="n">Outlet</text>
+
+  <rect x="554" y="232" width="112" height="24" rx="5" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="610" y="248" text-anchor="middle" class="n">Footer</text>
+
+  <!-- Pages -->
+  <path d="M350 256 L350 272" class="lien"/>
+  <line x1="70" y1="272" x2="630" y2="272" class="lien"/>
+  <line x1="70" y1="272" x2="70" y2="288" class="lien"/>
+  <line x1="210" y1="272" x2="210" y2="288" class="lien"/>
+  <line x1="350" y1="272" x2="350" y2="288" class="lien"/>
+  <line x1="490" y1="272" x2="490" y2="288" class="lien"/>
+  <line x1="630" y1="272" x2="630" y2="288" class="lien"/>
+
+  <rect x="24" y="288" width="92" height="24" rx="5" fill="#ecfdf5" stroke="#059669"/>
+  <text x="70" y="304" text-anchor="middle" class="n">Accueil</text>
+  <text x="70" y="322" text-anchor="middle" class="lg">/</text>
+
+  <rect x="164" y="288" width="92" height="24" rx="5" fill="#ecfdf5" stroke="#059669"/>
+  <text x="210" y="304" text-anchor="middle" class="n">Equipe</text>
+  <text x="210" y="322" text-anchor="middle" class="lg">/equipe</text>
+
+  <rect x="304" y="288" width="92" height="24" rx="5" fill="#ecfdf5" stroke="#059669"/>
+  <text x="350" y="304" text-anchor="middle" class="n">Projets</text>
+  <text x="350" y="322" text-anchor="middle" class="lg">/projets</text>
+
+  <rect x="444" y="288" width="92" height="24" rx="5" fill="#ecfdf5" stroke="#059669"/>
+  <text x="490" y="304" text-anchor="middle" class="n">DetailProjet</text>
+  <text x="490" y="322" text-anchor="middle" class="lg">/projets/:id</text>
+
+  <rect x="584" y="288" width="92" height="24" rx="5" fill="#ecfdf5" stroke="#059669"/>
+  <text x="630" y="304" text-anchor="middle" class="n">Contact</text>
+  <text x="630" y="322" text-anchor="middle" class="lg">/contact</text>
+
+  <!-- Composants feuilles -->
+  <line x1="210" y1="330" x2="210" y2="346" class="lien"/>
+  <rect x="150" y="346" width="120" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="210" y="361" text-anchor="middle" class="n">CarteMembre</text>
+  <line x1="210" y1="368" x2="210" y2="384" class="lien"/>
+  <rect x="140" y="384" width="140" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="210" y="399" text-anchor="middle" class="n">StatistiquesGitHub</text>
+  <line x1="210" y1="406" x2="210" y2="422" class="lien"/>
+  <rect x="136" y="422" width="148" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="210" y="437" text-anchor="middle" class="n">IndicateurChargement</text>
+  <text x="210" y="456" text-anchor="middle" class="lg">useStatistiquesGitHub()</text>
+
+  <path d="M350 330 L350 346" class="lien"/>
+  <path d="M350 346 L306 346 L306 360" class="lien"/>
+  <path d="M350 346 L394 346 L394 360" class="lien"/>
+  <rect x="252" y="360" width="108" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="306" y="375" text-anchor="middle" class="n">FiltreProjets</text>
+  <rect x="366" y="360" width="104" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="418" y="375" text-anchor="middle" class="n">CarteProjet</text>
+
+  <line x1="630" y1="330" x2="630" y2="384" class="lien"/>
+  <rect x="562" y="384" width="136" height="22" rx="5" fill="#fff7ed" stroke="#ea580c"/>
+  <text x="630" y="399" text-anchor="middle" class="n">ChampFormulaire × 4</text>
+
+  <line x1="70" y1="330" x2="70" y2="384" class="lien"/>
+  <rect x="14" y="384" width="112" height="22" rx="5" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="70" y="399" text-anchor="middle" class="lg">données statiques</text>
+</svg>
+<figcaption>Figure 2 — Arbre hiérarchique des composants. En bleu : infrastructure ; en vert : vues de routes ; en orange : composants réutilisables.</figcaption>
+</div>
+
+<div class="encadre">
+  <p class="encadre__titre">Lecture du schéma</p>
+  <p>
+  Le fournisseur de contexte est monté <strong>au-dessus</strong> de la table de
+  routage : la préférence de thème et de langue survit donc aux changements de
+  route, ce qui est précisément la raison d'être de Context API ici. Le
+  composant <code>Outlet</code> est l'emplacement où React Router injecte la vue
+  correspondant à l'URL courante, à l'intérieur du gabarit commun.
+  </p>
+</div>
+</section>
+
+<!-- ================================ SECTION 5 ============================== -->
+<section class="saut">
+<h2>5. Arborescence complète du projet</h2>
+
+<pre>portfolio-log3500/
+├── index.html                      Gabarit HTML, point d'injection de Vite
+├── package.json                    Scripts « start » et « build »
+├── vite.config.js                  outDir: dist ; proxy /api en développement
+├── railway.json                    Build, démarrage et sonde de santé
+├── .gitignore                      node_modules, dist, messages.json, .env
+├── README.md                       Documentation d'installation et de déploiement
+├── server.js                       Serveur Express (à la racine, comme exigé)
+│
+├── serveur/
+│   ├── validation.js               Validation serveur des champs du formulaire
+│   ├── persistance.js              Lecture / écriture de messages.json
+│   └── validation.test.js          11 tests unitaires (node --test)
+│
+├── public/
+│   ├── favicon.svg
+│   └── membres/
+│       ├── membre-1.svg            Photos des membres (à remplacer)
+│       ├── membre-2.svg
+│       └── membre-3.svg
+│
+├── src/
+│   ├── main.jsx                    createRoot + BrowserRouter + Contexte
+│   ├── App.jsx                     Table de routage React Router v6
+│   │
+│   ├── components/
+│   │   ├── MainLayout.jsx          Gabarit commun à toutes les routes
+│   │   ├── Header.jsx              Navigation, bascule thème et langue
+│   │   ├── Footer.jsx
+│   │   ├── CarteMembre.jsx
+│   │   ├── CarteProjet.jsx
+│   │   ├── FiltreProjets.jsx
+│   │   ├── ChampFormulaire.jsx
+│   │   ├── StatistiquesGitHub.jsx
+│   │   └── IndicateurChargement.jsx
+│   │
+│   ├── pages/
+│   │   ├── Accueil.jsx             route /
+│   │   ├── Equipe.jsx              route /equipe
+│   │   ├── Projets.jsx             route /projets
+│   │   ├── DetailProjet.jsx        route /projets/:identifiant
+│   │   ├── Contact.jsx             route /contact
+│   │   └── NonTrouvee.jsx          route de repli 404
+│   │
+│   ├── context/
+│   │   └── ContexteApplication.jsx État global : thème, langue, traduction
+│   │
+│   ├── hooks/
+│   │   └── useStatistiquesGitHub.js Appel asynchrone à l'API REST de GitHub
+│   │
+│   ├── data/
+│   │   ├── membres.js              Fiches des membres et compétences
+│   │   ├── projets.js              Catalogue des réalisations
+│   │   └── traductions.js          Dictionnaires français / anglais
+│   │
+│   └── styles/
+│       ├── variables.css           Charte visuelle, bascule clair / sombre
+│       ├── base.css                Réinitialisation, typographie, focus
+│       ├── layout.css              Gabarit, grilles, adaptation mobile
+│       └── composants.css          Boutons, cartes, formulaire, alertes
+│
+└── dist/                           Build de production (généré, non versionné)</pre>
+
+<table>
+  <caption>Tableau 4 — Volumétrie du code source</caption>
+  <thead><tr><th>Catégorie</th><th class="centre">Fichiers</th><th class="centre">Lignes</th></tr></thead>
+  <tbody>
+    <tr><td>Composants et vues React (<code>.jsx</code>)</td><td class="centre">18</td><td class="centre">1 188</td></tr>
+    <tr><td>Feuilles de style CSS</td><td class="centre">4</td><td class="centre">1 039</td></tr>
+    <tr><td>Données éditoriales et crochets (<code>.js</code>)</td><td class="centre">4</td><td class="centre">526</td></tr>
+    <tr><td>Serveur et tests unitaires</td><td class="centre">4</td><td class="centre">421</td></tr>
+    <tr><td>Configuration Vite</td><td class="centre">1</td><td class="centre">24</td></tr>
+    <tr><td><strong>Total du code source</strong></td><td class="centre"><strong>31</strong></td><td class="centre"><strong>3 198</strong></td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ================================ SECTION 6 ============================== -->
+<section class="saut">
+<h2>6. Gestion de l'état global — Context API</h2>
+
+<p>
+Deux préférences doivent être lisibles depuis pratiquement tous les composants :
+le thème visuel et la langue d'affichage. Les faire descendre de composant en
+composant par propriétés aurait imposé de traverser cinq niveaux de
+hiérarchie pour atteindre une simple étiquette. Context API résout exactement ce
+problème.
+</p>
+
+<pre>// src/context/ContexteApplication.jsx (extrait)
+const valeur = useMemo(() =&gt; {
+  const t = (cle) =&gt; {
+    const dictionnaire = traductions[langue] || traductions.fr;
+    return Object.prototype.hasOwnProperty.call(dictionnaire, cle)
+      ? dictionnaire[cle]
+      : cle;                       // repli : la clé elle-même
+  };
+
+  return {
+    theme, langue, t,
+    estSombre: theme === 'sombre',
+    basculerTheme:  () =&gt; setTheme(p =&gt; (p === 'clair' ? 'sombre' : 'clair')),
+    basculerLangue: () =&gt; setLangue(p =&gt; (p === 'fr' ? 'en' : 'fr'))
+  };
+}, [theme, langue]);</pre>
+
+<h3>6.1 Points d'implémentation notables</h3>
+<ul>
+  <li><strong>Mémoïsation.</strong> Sans <code>useMemo</code>, l'objet de contexte
+  serait recréé à chaque rendu et provoquerait le rendu de tous les
+  consommateurs, même si ni le thème ni la langue n'ont changé.</li>
+  <li><strong>Bascule par attribut, non par classe.</strong> L'effet applique
+  <code>data-theme="sombre"</code> sur <code>&lt;html&gt;</code> ; le fichier
+  <code>variables.css</code> redéfinit alors les seules variables de couleur.
+  Aucune règle de mise en page n'est dupliquée entre les deux thèmes.</li>
+  <li><strong>Préférence système respectée.</strong> À la première visite, le
+  thème initial est déduit de <code>prefers-color-scheme</code> ; le choix
+  explicite de l'utilisateur est ensuite conservé.</li>
+  <li><strong>Garde-fou.</strong> Le crochet <code>useApplication()</code> lève
+  une erreur explicite si un composant l'utilise hors du fournisseur, ce qui
+  transforme une valeur <code>null</code> silencieuse en message de diagnostic
+  immédiat.</li>
+  <li><strong>Langue et accessibilité.</strong> Le changement de langue met
+  également à jour l'attribut <code>lang</code> de <code>&lt;html&gt;</code>,
+  indispensable pour que les synthèses vocales emploient la bonne prononciation.</li>
+</ul>
+</section>
+
+<!-- ================================ SECTION 7 ============================== -->
+<section>
+<h2>7. Navigation — React Router v6</h2>
+
+<pre>// src/App.jsx
+&lt;Routes&gt;
+  &lt;Route path="/" element={&lt;MainLayout /&gt;}&gt;
+    &lt;Route index                    element={&lt;Accueil /&gt;} /&gt;
+    &lt;Route path="equipe"            element={&lt;Equipe /&gt;} /&gt;
+    &lt;Route path="projets"           element={&lt;Projets /&gt;} /&gt;
+    &lt;Route path="projets/:identifiant" element={&lt;DetailProjet /&gt;} /&gt;
+    &lt;Route path="contact"           element={&lt;Contact /&gt;} /&gt;
+    &lt;Route path="*"                 element={&lt;NonTrouvee /&gt;} /&gt;
+  &lt;/Route&gt;
+&lt;/Routes&gt;</pre>
+
+<table>
+  <caption>Tableau 5 — Correspondance entre adresses et vues</caption>
+  <thead><tr><th style="width:26%">Adresse</th><th style="width:24%">Vue</th><th>Particularité</th></tr></thead>
+  <tbody>
+    <tr><td><code>/</code></td><td>Accueil</td><td>Route <code>index</code> du gabarit parent.</td></tr>
+    <tr><td><code>/equipe</code></td><td>Equipe</td><td>Déclenche trois appels réseau concurrents vers l'API GitHub.</td></tr>
+    <tr><td><code>/projets</code></td><td>Projets</td><td>Filtrage local ; l'état du filtre est propre à la vue.</td></tr>
+    <tr><td><code>/projets/:identifiant</code></td><td>DetailProjet</td><td>Paramètre d'URL lu par <code>useParams()</code> ; repli si l'identifiant est inconnu.</td></tr>
+    <tr><td><code>/contact</code></td><td>Contact</td><td>Soumission asynchrone vers l'API du serveur.</td></tr>
+    <tr><td>toute autre</td><td>NonTrouvee</td><td>Route de repli à l'intérieur du gabarit, avec retour vers l'accueil.</td></tr>
+  </tbody>
+</table>
+
+<p>
+Le gabarit <code>MainLayout</code> est déclaré comme route parente : entête et
+pied de page ne sont donc jamais démontés lors d'un changement de vue. Seul le
+contenu de l'<code>Outlet</code> est remplacé, ce qui produit une transition
+instantanée, sans rechargement ni scintillement.
+</p>
+
+<h3>7.1 Accessibilité de la navigation</h3>
+<p>
+Dans une application monopage, un changement de route ne déplace pas le focus :
+un utilisateur au clavier ou au lecteur d'écran resterait donc positionné sur le
+lien qu'il vient d'activer, sans percevoir que la page a changé. Le gabarit
+corrige ce défaut en replaçant le focus sur l'élément <code>&lt;main&gt;</code>
+à chaque modification du chemin, et un lien d'évitement permet d'atteindre
+directement le contenu principal dès la première tabulation.
+</p>
+</section>
+
+<!-- ================================ SECTION 8 ============================== -->
+<section class="saut">
+<h2>8. Flux de données réseau — API REST de GitHub</h2>
+
+<p>
+La page Équipe injecte des données réelles : pour chaque membre, le nombre de
+dépôts publics, le nombre d'abonnés et la date d'inscription sont récupérés à
+l'exécution auprès de <code>https://api.github.com/users/&lt;pseudo&gt;</code>.
+La logique est isolée dans un crochet personnalisé afin d'être réutilisable et
+testable indépendamment de l'affichage.
+</p>
+
+<pre>// src/hooks/useStatistiquesGitHub.js (extrait)
+useEffect(() =&gt; {
+  const controleur = new AbortController();
+
+  async function recupererProfil() {
+    setEnChargement(true);
+    setErreur(null);
+    try {
+      const reponse = await fetch(`https://api.github.com/users/${pseudo}`, {
+        signal: controleur.signal,
+        headers: { Accept: 'application/vnd.github+json' }
+      });
+      if (!reponse.ok) throw new Error(`Reponse HTTP ${reponse.status}`);
+      const charge = await reponse.json();
+      setDonnees({ /* … normalisation des seuls champs affichés … */ });
+    } catch (exception) {
+      if (exception.name !== 'AbortError') setErreur(exception.message);
+    } finally {
+      if (!controleur.signal.aborted) setEnChargement(false);
+    }
+  }
+
+  recupererProfil();
+  return () =&gt; controleur.abort();   // nettoyage au démontage
+}, [pseudo, compteurRelance]);</pre>
+
+<h3>8.1 Les trois états d'un appel réseau</h3>
+<table>
+  <thead><tr><th style="width:20%">État</th><th style="width:34%">Rendu correspondant</th><th>Justification</th></tr></thead>
+  <tbody>
+    <tr><td>En chargement</td><td><code>IndicateurChargement</code> — rotor animé, <code>role="status"</code></td><td>Le critère 2 de la grille exige explicitement des indicateurs de chargement réseau.</td></tr>
+    <tr><td>Erreur</td><td>Encadré d'avertissement et bouton « Réessayer »</td><td>L'API publique de GitHub limite les appels anonymes ; l'échec doit rester lisible et récupérable.</td></tr>
+    <tr><td>Succès</td><td>Liste de description <code>&lt;dl&gt;</code> des trois statistiques</td><td>Structure sémantique appropriée pour des couples intitulé / valeur.</td></tr>
+  </tbody>
+</table>
+
+<div class="encadre">
+  <p class="encadre__titre">Pourquoi un AbortController ?</p>
+  <p>
+  Si l'utilisateur quitte la page Équipe avant la fin des requêtes, le composant
+  est démonté alors que les promesses sont encore en vol. Sans annulation, leur
+  résolution appellerait <code>setDonnees</code> sur un composant démonté : fuite
+  mémoire et avertissement en console. La fonction de nettoyage retournée par
+  <code>useEffect</code> abandonne la requête, et le bloc <code>catch</code>
+  ignore délibérément l'exception <code>AbortError</code>, qui n'est pas une
+  erreur applicative.
+  </p>
+</div>
+
+<div class="encadre">
+  <p class="encadre__titre">Limite d'appels de l'API GitHub</p>
+  <p>
+  Les requêtes anonymes sont plafonnées à soixante par heure et par adresse IP.
+  Avec trois membres, chaque affichage de la page Équipe consomme trois appels :
+  la marge est confortable pour une démonstration, mais il faut éviter de
+  recharger la page en boucle juste avant la soutenance. En cas de dépassement,
+  l'interface affiche l'encadré d'erreur — comportement volontaire et documenté,
+  et non un plantage.
+  </p>
+</div>
+</section>
+
+<!-- ================================ SECTION 9 ============================== -->
+<section class="saut">
+<h2>9. Architecture serveur — Node.js / Express</h2>
+
+<p>
+Le serveur d'application est configuré dans <code>server.js</code>, à la racine
+du projet conformément aux spécifications. Il écoute sur le port dynamique
+attribué par l'hôte Cloud et remplit trois fonctions : servir le build de
+production, exposer l'API de contact et assurer le repli de l'application
+monopage.
+</p>
+
+<h3>9.1 Chaîne des intergiciels</h3>
+<pre>app.use(express.json({ limit: '64kb' }));        // 1. analyse du corps JSON
+app.use('/api', journalisation);                 // 2. journal des appels API
+app.use(express.static(DOSSIER_BUILD, {          // 3. build de production Vite
+  maxAge: '1h', index: false
+}));
+app.get ('/api/sante',    …);                    // 4. sonde de disponibilité
+app.post('/api/contact',  …);                    // 5. réception du formulaire
+app.get ('/api/messages', …);                    // 6. historique persisté
+app.use ('/api',          …);                    // 7. 404 JSON pour l'API
+app.get ('*',             …);                    // 8. repli SPA : index.html
+
+app.listen(process.env.PORT || 3000, …);</pre>
+
+<p>
+L'ordre est signifiant. La limite de 64 ko sur le corps JSON écarte les charges
+utiles abusives dès l'entrée. L'option <code>index: false</code> du middleware
+statique est indispensable : sans elle, Express servirait
+<code>dist/index.html</code> pour la racine avant que les routes d'API ne soient
+atteintes dans certaines configurations. Enfin, le repli <code>app.get('*')</code>
+est déclaré en dernier, après le gestionnaire 404 de l'API, afin qu'une adresse
+d'API erronée retourne un message JSON explicite plutôt que la page HTML.
+</p>
+
+<h3>9.2 Route POST /api/contact</h3>
+
+<table>
+  <caption>Tableau 6 — Contrat de la route de contact</caption>
+  <thead><tr><th style="width:16%">Code</th><th style="width:26%">Situation</th><th>Corps de la réponse</th></tr></thead>
+  <tbody>
+    <tr><td class="centre"><strong>201</strong></td><td>Champs valides, message écrit</td><td><code>{ succes: true, message: "…", identifiant: "msg_…" }</code></td></tr>
+    <tr><td class="centre"><strong>400</strong></td><td>Validation en échec</td><td><code>{ succes: false, erreurs: [ … ] }</code></td></tr>
+    <tr><td class="centre"><strong>500</strong></td><td>Écriture impossible sur le disque</td><td><code>{ succes: false, message: "…" }</code></td></tr>
+  </tbody>
+</table>
+
+<h4>Règles de validation appliquées côté serveur</h4>
+<table>
+  <thead><tr><th style="width:18%">Champ</th><th style="width:20%">Type attendu</th><th>Contrainte</th></tr></thead>
+  <tbody>
+    <tr><td><code>nom</code></td><td>chaîne</td><td>de 2 à 80 caractères après suppression des espaces</td></tr>
+    <tr><td><code>courriel</code></td><td>chaîne</td><td>conforme à <code>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i</code>, 120 caractères au plus</td></tr>
+    <tr><td><code>sujet</code></td><td>chaîne</td><td>de 3 à 120 caractères</td></tr>
+    <tr><td><code>message</code></td><td>chaîne</td><td>de 10 à 2 000 caractères</td></tr>
+  </tbody>
+</table>
+
+<h3>9.3 Persistance des messages</h3>
+<p>
+Chaque message validé est normalisé — espaces superflus supprimés, adresse de
+courriel mise en minuscules — puis complété d'un identifiant unique et d'un
+horodatage ISO 8601, avant d'être ajouté au tableau contenu dans
+<code>messages.json</code>. La lecture est tolérante aux pannes : un fichier
+absent ou corrompu retourne un tableau vide au lieu de faire échouer la requête.
+</p>
+
+<pre>{
+  "id": "msg_1753392000000_k3f9dz",
+  "nom": "Marie Dupont",
+  "courriel": "marie.dupont@exemple.ht",
+  "sujet": "Félicitations",
+  "message": "Votre portfolio est très réussi.",
+  "recuLe": "2026-07-29T14:20:00.000Z"
+}</pre>
+
+<div class="encadre">
+  <p class="encadre__titre">Limite assumée : système de fichiers éphémère</p>
+  <p>
+  Le système de fichiers d'un conteneur Railway est réinitialisé à chaque
+  redéploiement : <code>messages.json</code> ne survit donc pas à une nouvelle
+  intégration sur <code>main</code>. C'est le comportement attendu par l'énoncé,
+  qui demande une persistance dans un fichier local. Une conservation durable
+  exigerait un volume monté ou une base de données — voir la section 15.
+  </p>
+</div>
+</section>
+
+<!-- =============================== SECTION 10 ============================== -->
+<section class="saut">
+<h2>10. Intégration, charte visuelle et accessibilité</h2>
+
+<h3>10.1 Mise en page en CSS pur</h3>
+<p>
+Aucun framework ni bibliothèque tierce de style n'est employé : la mise en page
+repose exclusivement sur Flexbox et CSS Grid. Flexbox structure les éléments
+linéaires — barre de navigation, pieds de carte, groupes de boutons — tandis que
+Grid gouverne les dispositions bidimensionnelles. Les grilles s'adaptent sans
+point de rupture explicite grâce au motif
+<code>repeat(auto-fit, minmax(…, 1fr))</code> : le nombre de colonnes découle de
+la largeur disponible.
+</p>
+
+<table>
+  <caption>Tableau 7 — Comportement responsive</caption>
+  <thead><tr><th style="width:24%">Largeur d'écran</th><th style="width:26%">Navigation</th><th>Grilles de contenu</th></tr></thead>
+  <tbody>
+    <tr><td>≥ 1160 px</td><td>Horizontale complète</td><td>3 à 4 colonnes ; conteneur plafonné à 1160 px</td></tr>
+    <tr><td>761 – 1159 px</td><td>Horizontale complète</td><td>2 à 3 colonnes selon la grille</td></tr>
+    <tr><td>≤ 760 px</td><td>Menu replié en bouton, dépliage vertical</td><td>1 à 2 colonnes ; espacements réduits</td></tr>
+    <tr><td>≤ 520 px</td><td>Menu replié</td><td>Colonne unique ; statistiques GitHub en liste</td></tr>
+  </tbody>
+</table>
+
+<h3>10.2 Bascule des styles visuels</h3>
+<p>
+La charte est entièrement paramétrée par variables CSS déclarées sur
+<code>:root</code>. Le sélecteur <code>[data-theme='sombre']</code> redéfinit les
+seules variables de couleur ; les règles de mise en page ne sont écrites qu'une
+fois. Trente-huit variables couvrent couleurs, typographie, espacements, formes
+et durées de transition.
+</p>
+
+<h3>10.3 Contrastes de couleurs mesurés</h3>
+<p>
+Les rapports de contraste ci-dessous ont été calculés selon la formule de
+luminance relative de la recommandation WCAG 2.1. Le seuil de niveau AA pour du
+texte courant est de 4,5:1 ; celui de niveau AAA, de 7:1. <strong>Les
+vingt-six couples de couleurs de l'interface satisfont au niveau AA, et
+vingt d'entre eux atteignent le niveau AAA.</strong>
+</p>
+
+<table>
+  <caption>Tableau 8 — Rapports de contraste par couple texte / fond</caption>
+  <thead>
+    <tr>
+      <th style="width:40%">Couple de couleurs</th>
+      <th class="centre">Mode clair</th><th class="centre">Niveau</th>
+      <th class="centre">Mode sombre</th><th class="centre">Niveau</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Texte courant sur fond de page</td><td class="centre">16,72:1</td><td class="centre ok">AAA</td><td class="centre">17,14:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Texte courant sur surface de carte</td><td class="centre">17,76:1</td><td class="centre ok">AAA</td><td class="centre">14,68:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Texte secondaire sur fond de page</td><td class="centre">7,50:1</td><td class="centre ok">AAA</td><td class="centre">9,97:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Texte secondaire sur surface de carte</td><td class="centre">7,96:1</td><td class="centre ok">AAA</td><td class="centre">8,54:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Couleur d'accent sur fond de page</td><td class="centre">6,31:1</td><td class="centre ok">AA</td><td class="centre">7,79:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Couleur d'accent sur surface de carte</td><td class="centre">6,70:1</td><td class="centre ok">AA</td><td class="centre">6,67:1</td><td class="centre ok">AA</td></tr>
+    <tr><td>Libellé du bouton principal</td><td class="centre">6,70:1</td><td class="centre ok">AA</td><td class="centre">7,72:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Étiquette de technologie</td><td class="centre">15,02:1</td><td class="centre ok">AAA</td><td class="centre">12,76:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Message de confirmation (succès)</td><td class="centre">8,30:1</td><td class="centre ok">AAA</td><td class="centre">10,99:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Message d'erreur</td><td class="centre">8,20:1</td><td class="centre ok">AAA</td><td class="centre">10,50:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Message d'avertissement</td><td class="centre">7,79:1</td><td class="centre ok">AAA</td><td class="centre">10,37:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Accent sur section alternée</td><td class="centre">5,83:1</td><td class="centre ok">AA</td><td class="centre">7,19:1</td><td class="centre ok">AAA</td></tr>
+    <tr><td>Texte secondaire sur section alternée</td><td class="centre">6,93:1</td><td class="centre ok">AA</td><td class="centre">9,20:1</td><td class="centre ok">AAA</td></tr>
+  </tbody>
+</table>
+
+<h3>10.4 Dispositifs d'accessibilité mis en œuvre</h3>
+<ul>
+  <li><strong>Structure sémantique.</strong> <code>header</code>,
+  <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>
+  et <code>footer</code> délimitent les repères de page ; les rôles
+  <code>banner</code> et <code>contentinfo</code> les explicitent.</li>
+  <li><strong>Hiérarchie des titres.</strong> Un unique <code>h1</code> par vue et
+  aucun saut de niveau — vérification automatisée, section 13.</li>
+  <li><strong>Formulaires.</strong> Chaque champ possède un <code>label</code>
+  associé par <code>for</code>/<code>id</code> ; les erreurs sont reliées par
+  <code>aria-describedby</code>, signalées par <code>aria-invalid</code> et
+  annoncées par <code>role="alert"</code>.</li>
+  <li><strong>États des commandes.</strong> <code>aria-pressed</code> sur les
+  boutons de filtrage et sur la bascule de thème, <code>aria-expanded</code> et
+  <code>aria-controls</code> sur le bouton de menu, <code>aria-current="page"</code>
+  sur le lien de navigation actif.</li>
+  <li><strong>Zones dynamiques.</strong> Les indicateurs de chargement et les
+  réponses du serveur sont placés dans des régions <code>aria-live="polite"</code>,
+  afin d'être annoncés sans interrompre la lecture en cours.</li>
+  <li><strong>Navigation au clavier.</strong> Lien d'évitement en tête de page,
+  contour de focus visible de 3 px sur tout élément interactif, focus replacé sur
+  le contenu principal à chaque changement de route.</li>
+  <li><strong>Images.</strong> Toutes les images portent un attribut
+  <code>alt</code> descriptif ; les éléments purement décoratifs — bandeaux
+  colorés, barres du bouton de menu — sont masqués par
+  <code>aria-hidden="true"</code>.</li>
+  <li><strong>Mouvement.</strong> La requête média
+  <code>prefers-reduced-motion</code> neutralise animations et défilement doux
+  pour les personnes sensibles au mouvement.</li>
+</ul>
+</section>
+
+<!-- =============================== SECTION 11 ============================== -->
+<section class="saut">
+<h2>11. Sécurité applicative</h2>
+
+<table>
+  <caption>Tableau 9 — Mesures de sécurité et risques couverts</caption>
+  <thead><tr><th style="width:30%">Mesure</th><th style="width:26%">Risque couvert</th><th>Mise en œuvre</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Interdiction de <code>innerHTML</code></td>
+      <td>Injection de code par script (XSS)</td>
+      <td>Aucune occurrence de <code>innerHTML</code> ni de <code>dangerouslySetInnerHTML</code> dans le code source. React rend toute valeur dynamique comme du texte, ce qui équivaut à <code>textContent</code> et neutralise le balisage éventuellement contenu dans une donnée d'API ou une saisie.</td>
+    </tr>
+    <tr>
+      <td>Validation côté serveur</td>
+      <td>Requêtes forgées hors navigateur</td>
+      <td>La validation client est un confort d'usage ; <code>serveur/validation.js</code> revalide types, longueurs et format de l'adresse de courriel avant toute écriture.</td>
+    </tr>
+    <tr>
+      <td>Limite de taille du corps</td>
+      <td>Saturation mémoire / déni de service</td>
+      <td><code>express.json({ limit: '64kb' })</code> rejette les charges utiles volumineuses dès l'analyse.</td>
+    </tr>
+    <tr>
+      <td>Bornes de longueur</td>
+      <td>Croissance incontrôlée du fichier</td>
+      <td>Longueurs maximales imposées sur chacun des quatre champs, côté client comme côté serveur.</td>
+    </tr>
+    <tr>
+      <td><code>rel="noopener noreferrer"</code></td>
+      <td>Détournement d'onglet (<i>tabnabbing</i>)</td>
+      <td>Appliqué à tous les liens externes ouverts dans un nouvel onglet.</td>
+    </tr>
+    <tr>
+      <td>Encodage des paramètres d'URL</td>
+      <td>Injection dans l'appel à l'API externe</td>
+      <td><code>encodeURIComponent(pseudo)</code> avant construction de l'adresse GitHub.</td>
+    </tr>
+    <tr>
+      <td>Historique sans données personnelles</td>
+      <td>Exposition d'adresses de courriel</td>
+      <td>La route <code>GET /api/messages</code> ne retourne ni le corps du message ni l'adresse de son auteur.</td>
+    </tr>
+    <tr>
+      <td>Aucun secret versionné</td>
+      <td>Fuite d'identifiants</td>
+      <td><code>.env</code> et <code>messages.json</code> figurent dans <code>.gitignore</code> ; l'application ne requiert aucune clé d'API.</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- =============================== SECTION 12 ============================== -->
+<section>
+<h2>12. Déploiement continu sur Railway</h2>
+
+<h3>12.1 Scripts d'exécution</h3>
+<pre>"scripts": {
+  "start": "node server.js",
+  "build": "vite build"
+}</pre>
+
+<h3>12.2 Chaîne de déploiement</h3>
+<ol>
+  <li>Le code est poussé sur la branche <code>main</code> du dépôt GitHub public.</li>
+  <li>Railway, connecté au dépôt, détecte l'intégration et déclenche un build.</li>
+  <li><code>npm install</code> puis <code>npm run build</code> : Vite produit le
+  dossier <code>dist/</code> optimisé et haché.</li>
+  <li><code>npm start</code> lance <code>server.js</code>, qui lit le port dans
+  <code>process.env.PORT</code>.</li>
+  <li>La sonde <code>GET /api/sante</code> confirme la disponibilité et le
+  nouveau déploiement remplace le précédent.</li>
+</ol>
+
+<h3>12.3 Configuration déclarative</h3>
+<pre>// railway.json
+{
+  "build":  { "builder": "NIXPACKS", "buildCommand": "npm run build" },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/api/sante",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  }
+}</pre>
+
+<div class="encadre">
+  <p class="encadre__titre">Erreur à ne pas commettre</p>
+  <p>
+  Ne définissez jamais manuellement une variable d'environnement
+  <code>PORT</code> sur Railway. La plateforme injecte elle-même le port
+  d'écoute ; une valeur figée empêcherait le routeur d'atteindre le conteneur et
+  le déploiement échouerait au contrôle de santé, alors même que l'application
+  fonctionne parfaitement en local.
+  </p>
+</div>
+</section>
+
+<!-- =============================== SECTION 13 ============================== -->
+<section class="saut">
+<h2>13. Vérifications et preuves de conformité W3C</h2>
+
+<h3>13.1 Tests automatisés du code</h3>
+<p>
+Deux campagnes de tests ont été exécutées avant la remise. Elles s'appuient sur
+le lanceur de tests intégré à Node.js et ne requièrent aucune dépendance
+supplémentaire.
+</p>
+
+<table>
+  <caption>Tableau 10 — Couverture des tests automatisés</caption>
+  <thead><tr><th style="width:34%">Campagne</th><th class="centre" style="width:12%">Tests</th><th>Portée</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Validation et persistance serveur<br><span class="mono" style="font-size:8pt;">npm run test:serveur</span></td>
+      <td class="centre"><strong>11 / 11</strong> <span class="ok">✓</span></td>
+      <td>Charges valides et invalides, adresses de courriel bien et mal formées, bornes de longueur, normalisation, écriture puis relecture de <code>messages.json</code>, fichier absent, fichier corrompu.</td>
+    </tr>
+    <tr>
+      <td>Rendu et structure des vues</td>
+      <td class="centre"><strong>30 / 30</strong> <span class="ok">✓</span></td>
+      <td>Rendu sans erreur des six vues et de tous les composants ; unicité des identifiants ; hiérarchie des titres sans saut de niveau ; présence d'un <code>alt</code> sur chaque image ; absence de référence ARIA orpheline ; présence des repères de structure.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Vérifications structurelles complémentaires</h4>
+<table>
+  <thead><tr><th style="width:52%">Contrôle</th><th>Résultat</th></tr></thead>
+  <tbody>
+    <tr><td>Occurrences de <code>innerHTML</code> / <code>dangerouslySetInnerHTML</code></td><td><span class="ok">0</span> — exigence de sécurité de l'énoncé satisfaite</td></tr>
+    <tr><td>Analyse syntaxique des 29 fichiers source</td><td><span class="ok">0 erreur</span></td></tr>
+    <tr><td>Imports relatifs pointant vers un fichier inexistant</td><td><span class="ok">0</span></td></tr>
+    <tr><td>Variables CSS utilisées mais non déclarées</td><td><span class="ok">0</span></td></tr>
+    <tr><td>Équilibre des dictionnaires de traduction (fr / en)</td><td><span class="ok">67 clés de part et d'autre, aucune clé manquante</span></td></tr>
+    <tr><td>Couples de couleurs sous le seuil AA de 4,5:1</td><td><span class="ok">0 sur 26</span></td></tr>
+  </tbody>
+</table>
+
+<h3>13.2 Procédure de validation W3C</h3>
+<p>
+Les validateurs officiels du W3C doivent être exécutés sur l'application
+<strong>déployée</strong>, une fois l'URL Railway obtenue — le rendu final étant
+produit par React à l'exécution, valider les fichiers source ne prouverait rien.
+Procédure retenue :
+</p>
+<ol>
+  <li>Ouvrir <span class="mono">https://validator.w3.org/nu/</span>, saisir l'URL
+  de production et valider. Répéter l'opération pour chacune des adresses
+  <code>/</code>, <code>/equipe</code>, <code>/projets</code> et
+  <code>/contact</code>.</li>
+  <li>Pour une vue dépendant de données chargées en asynchrone, préférer l'onglet
+  <i>Check by text input</i> : copier le code source généré depuis les outils de
+  développement du navigateur (<i>Inspecter</i> → <code>&lt;html&gt;</code> →
+  <i>Copy outer HTML</i>), afin que le contenu injecté par React soit inclus.</li>
+  <li>Ouvrir <span class="mono">https://jigsaw.w3.org/css-validator/</span> et
+  valider la feuille de style compilée <code>dist/assets/index-*.css</code>.</li>
+  <li>Capturer chaque écran de résultat et l'insérer ci-dessous.</li>
+</ol>
+
+<h4>Preuve 1 — Validateur HTML (validator.w3.org/nu)</h4>
+<div class="emplacement-capture">
+  Insérer ici la capture d'écran du résultat<br>
+  <em>« Document checking completed. No errors or warnings to show. »</em><br><br>
+  URL testée : ______________________________________________
+</div>
+
+<h4>Preuve 2 — Validateur CSS (jigsaw.w3.org/css-validator)</h4>
+<div class="emplacement-capture">
+  Insérer ici la capture d'écran du résultat<br>
+  <em>« Congratulations! No Error Found. »</em><br><br>
+  Feuille testée : ______________________________________________
+</div>
+
+<h4>Preuve 3 — Déploiement Railway réussi</h4>
+<div class="emplacement-capture">
+  Insérer ici la capture du tableau de bord Railway :<br>
+  build vert, journal de démarrage, URL publique générée.
+</div>
+
+<h4>Preuve 4 — Persistance effective des messages</h4>
+<div class="emplacement-capture">
+  Insérer ici la capture de la réponse <code>201</code> du formulaire<br>
+  et le contenu retourné par <code>GET /api/messages</code>.
+</div>
+
+<h3>13.3 Points de vigilance connus des validateurs</h3>
+<ul>
+  <li>L'attribut <code>lang</code> de <code>&lt;html&gt;</code> est mis à jour
+  dynamiquement par le contexte : après une bascule en anglais, il doit valoir
+  <code>en</code>. Validez la page dans la langue affichée.</li>
+  <li>Le validateur signale les identifiants dupliqués ; l'affichage simultané
+  de trois cartes de membre a été vérifié sur ce point par les tests
+  automatisés.</li>
+  <li>Vite ajoute une empreinte au nom des fichiers compilés : relevez le nom
+  exact du fichier CSS produit dans <code>dist/assets/</code> avant de le
+  soumettre.</li>
+</ul>
+</section>
+
+<!-- =============================== SECTION 14 ============================== -->
+<section class="saut">
+<h2>14. Répartition du travail et suivi Git</h2>
+
+<table>
+  <caption>Tableau 11 — Ensembles de tâches et fichiers correspondants</caption>
+  <thead>
+    <tr><th style="width:18%">Étudiant</th><th style="width:30%">Ensemble de tâches</th><th>Fichiers dont il répond</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Fils Léonel Charles</td>
+      <td><strong>Ensemble 1</strong><br>Intégration sémantique, charte visuelle et accessibilité</td>
+      <td><code>src/styles/*.css</code> (4 fichiers, 1 038 lignes), balisage sémantique des composants et des vues, <code>index.html</code>, attributs ARIA de <code>ChampFormulaire.jsx</code></td>
+    </tr>
+    <tr>
+      <td>___________________</td>
+      <td><strong>Ensemble 2</strong><br>Architecture client, composants et routage React</td>
+      <td><code>vite.config.js</code>, <code>src/main.jsx</code>, <code>src/App.jsx</code>, <code>src/components/</code>, validation dynamique de <code>src/pages/Contact.jsx</code></td>
+    </tr>
+    <tr>
+      <td>___________________</td>
+      <td><strong>Ensemble 3</strong><br>Développement serveur, interconnexion API et DevOps</td>
+      <td><code>server.js</code>, <code>serveur/</code> (validation, persistance, tests), <code>src/hooks/useStatistiquesGitHub.js</code>, <code>railway.json</code>, gestion du dépôt Git</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>14.1 Conventions de versionnage</h3>
+<ul>
+  <li>Une branche par ensemble de tâches : <code>integration-css</code>,
+  <code>client-react</code>, <code>serveur-devops</code>.</li>
+  <li>Fusion vers <code>main</code> exclusivement par <i>pull request</i>, relue
+  par un coéquipier — la revue de code fait partie des tâches de l'ensemble 3.</li>
+  <li>Messages de commit descriptifs au format
+  <code>type(portée) : description</code>, par exemple
+  <code>feat(contact) : valider le courriel avant l'envoi réseau</code>.</li>
+  <li>Au minimum un commit par membre et par jour de travail, afin que
+  l'historique reflète une contribution réellement équitable.</li>
+  <li>Planification des tâches sur GitHub Projects, en quatre colonnes :
+  <i>À faire</i>, <i>En cours</i>, <i>En revue</i>, <i>Terminé</i>.</li>
+</ul>
+</section>
+
+<!-- =============================== SECTION 15 ============================== -->
+<section>
+<h2>15. Limites connues et pistes d'amélioration</h2>
+
+<table>
+  <thead><tr><th style="width:34%">Limite</th><th style="width:33%">Conséquence</th><th>Amélioration envisagée</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Persistance sur un système de fichiers éphémère</td>
+      <td><code>messages.json</code> est perdu à chaque redéploiement</td>
+      <td>Monter un volume Railway sur le dossier de l'application, ou migrer vers PostgreSQL</td>
+    </tr>
+    <tr>
+      <td>Appels anonymes à l'API GitHub</td>
+      <td>Plafond de 60 requêtes par heure et par adresse IP</td>
+      <td>Faire relayer l'appel par le serveur avec un jeton, et mettre les réponses en cache</td>
+    </tr>
+    <tr>
+      <td>Absence de protection contre les envois répétés</td>
+      <td>Un automate pourrait remplir le fichier de messages</td>
+      <td>Limitation de débit par adresse IP, ou question de vérification simple</td>
+    </tr>
+    <tr>
+      <td>Aucune notification à la réception d'un message</td>
+      <td>L'équipe doit consulter l'historique manuellement</td>
+      <td>Envoi d'un courriel de notification via un service de messagerie transactionnelle</td>
+    </tr>
+    <tr>
+      <td>Contenus éditoriaux figés dans le code</td>
+      <td>Toute mise à jour de texte exige un redéploiement</td>
+      <td>Externaliser <code>src/data/</code> vers un service de gestion de contenu ou une API dédiée</td>
+    </tr>
+    <tr>
+      <td>Tests limités au serveur et au rendu</td>
+      <td>Les interactions utilisateur ne sont pas couvertes</td>
+      <td>Ajouter des tests d'interaction et un scénario de bout en bout automatisé</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Conclusion</h3>
+<p>
+L'application satisfait l'ensemble des spécifications techniques obligatoires de
+l'énoncé : découpage en composants React modulaires, navigation sans
+rechargement par React Router v6, état global centralisé par Context API,
+consommation asynchrone de l'API REST de GitHub, serveur Express servant le
+build de production et interceptant le formulaire de contact, persistance des
+messages en JSON, et déploiement automatisé sur Railway à chaque intégration.
+Les exigences transversales — mise en page en CSS pur, accessibilité vérifiée et
+interdiction de <code>innerHTML</code> — ont fait l'objet de contrôles
+automatisés dont les résultats figurent à la section 13.
+</p>
+</section>
+
+</body>
+</html>

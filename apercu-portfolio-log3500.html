@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="clair">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Apercu de demonstration du portfolio d'equipe LOG3500 - ISTEAH.">
+<title>Portfolio d'equipe | LOG3500 - ISTEAH (apercu)</title>
+<style>
+/* ===== variables.css ===== */
+/* ==========================================================================
+   variables.css — Charte visuelle et bascule de styles (mode clair / sombre)
+   La bascule est pilotee par l'attribut data-theme place sur <html> par le
+   fournisseur de contexte (Context API). Aucun framework CSS n'est utilise.
+   Les couples texte/fond respectent un rapport de contraste superieur a 4,5:1
+   (regle WCAG 2.1 AA).
+   ========================================================================== */
+
+:root {
+  /* Palette de base — mode clair */
+  --couleur-fond: #f7f8fb;
+  --couleur-fond-alterne: #edeff5;
+  --couleur-surface: #ffffff;
+  --couleur-surface-appuyee: #e9ecf3;
+  --couleur-bordure: #d3d8e3;
+  --couleur-texte: #16181d;
+  --couleur-texte-discret: #4a5160;
+  --couleur-accent: #1d4ed8;
+  --couleur-accent-appuye: #163bb0;
+  --couleur-accent-contraste: #ffffff;
+  --couleur-succes-fond: #dcfce7;
+  --couleur-succes-texte: #14532d;
+  --couleur-echec-fond: #fee2e2;
+  --couleur-echec-texte: #7f1d1d;
+  --couleur-avertissement-fond: #fef3c7;
+  --couleur-avertissement-texte: #713f12;
+  --couleur-focus: #b45309;
+  --couleur-voile-accent: rgba(29, 78, 216, 0.16);
+
+  /* Typographie */
+  --police-principale: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --police-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --taille-base: 1rem;
+  --hauteur-ligne: 1.65;
+
+  /* Espacements (echelle reguliere) */
+  --espace-xs: 0.375rem;
+  --espace-s: 0.75rem;
+  --espace-m: 1.25rem;
+  --espace-l: 2rem;
+  --espace-xl: 3.25rem;
+
+  /* Formes et ombres */
+  --rayon-s: 6px;
+  --rayon-m: 12px;
+  --ombre-basse: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --ombre-moyenne: 0 6px 18px rgba(15, 23, 42, 0.10);
+
+  /* Gabarit */
+  --largeur-conteneur: 1160px;
+  --largeur-conteneur-etroit: 780px;
+  --duree-transition: 180ms;
+}
+
+/* Mode sombre — redefinition des seules variables de couleur. */
+[data-theme='sombre'] {
+  --couleur-fond: #0e1117;
+  --couleur-fond-alterne: #151a23;
+  --couleur-surface: #1a212c;
+  --couleur-surface-appuyee: #232c3a;
+  --couleur-bordure: #313d4f;
+  --couleur-texte: #f1f4f9;
+  --couleur-texte-discret: #b3bdcd;
+  --couleur-accent: #7aa5ff;
+  --couleur-accent-appuye: #a3c0ff;
+  --couleur-accent-contraste: #0b1220;
+  --couleur-succes-fond: #14361f;
+  --couleur-succes-texte: #bbf7d0;
+  --couleur-echec-fond: #45161a;
+  --couleur-echec-texte: #fecaca;
+  --couleur-avertissement-fond: #3f2f10;
+  --couleur-avertissement-texte: #fde68a;
+  --couleur-focus: #fbbf24;
+  --couleur-voile-accent: rgba(122, 165, 255, 0.16);
+  --ombre-basse: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --ombre-moyenne: 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+
+/* ===== base.css ===== */
+/* ==========================================================================
+   base.css — Reinitialisation legere, typographie et regles d'accessibilite
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--police-principale);
+  font-size: var(--taille-base);
+  line-height: var(--hauteur-ligne);
+  color: var(--couleur-texte);
+  background-color: var(--couleur-fond);
+  transition: background-color var(--duree-transition) ease,
+    color var(--duree-transition) ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  margin: 0 0 var(--espace-s);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 1.2rem + 2.4vw, 2.75rem);
+}
+
+h2 {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0 0 var(--espace-s);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--couleur-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--couleur-accent-appuye);
+}
+
+/* Indicateur de focus visible et contraste sur tout element interactif :
+   exigence d'accessibilite pour la navigation au clavier. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--couleur-focus);
+  outline-offset: 2px;
+  border-radius: var(--rayon-s);
+}
+
+/* Le contenu principal recoit le focus lors des changements de route ; on
+   masque le liseré par defaut du navigateur pour ce cas particulier. */
+main:focus {
+  outline: none;
+}
+
+/* Contenu reserve aux lecteurs d'ecran. */
+.sr-seulement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien d'evitement : invisible jusqu'a la prise de focus au clavier. */
+.lien-evitement {
+  position: absolute;
+  top: -100px;
+  left: var(--espace-s);
+  z-index: 100;
+  padding: var(--espace-s) var(--espace-m);
+  background-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+  border-radius: var(--rayon-s);
+  text-decoration: none;
+  transition: top var(--duree-transition) ease;
+}
+
+.lien-evitement:focus {
+  top: var(--espace-s);
+}
+
+/* Respect de la preference systeme de reduction des animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===== layout.css ===== */
+/* ==========================================================================
+   layout.css — Gabarit general : entete, navigation, sections, grilles, pied
+   Mise en page realisee exclusivement en Flexbox et CSS Grid (aucun framework).
+   ========================================================================== */
+
+.enveloppe-application {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.conteneur {
+  width: 100%;
+  max-width: var(--largeur-conteneur);
+  margin: 0 auto;
+  padding: 0 var(--espace-m);
+}
+
+.conteneur--etroit {
+  max-width: var(--largeur-conteneur-etroit);
+}
+
+/* ------------------------------- Entete --------------------------------- */
+
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--couleur-surface);
+  border-bottom: 1px solid var(--couleur-bordure);
+  box-shadow: var(--ombre-basse);
+}
+
+.entete__interieur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-s);
+  padding-top: var(--espace-s);
+  padding-bottom: var(--espace-s);
+}
+
+.entete__marque {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-s);
+  text-decoration: none;
+  color: inherit;
+}
+
+.entete__logo {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rayon-m);
+  background-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+  font-family: var(--police-monospace);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.entete__textes {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.entete__titre {
+  font-weight: 700;
+}
+
+.entete__sous-titre {
+  font-size: 0.8rem;
+  color: var(--couleur-texte-discret);
+}
+
+.entete__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  background-color: transparent;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-s);
+  cursor: pointer;
+}
+
+.entete__barre {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--couleur-texte);
+}
+
+/* ----------------------------- Navigation -------------------------------- */
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-m);
+}
+
+.navigation__liste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-xs);
+}
+
+.navigation__lien {
+  display: inline-block;
+  padding: var(--espace-xs) var(--espace-s);
+  border-radius: var(--rayon-s);
+  color: var(--couleur-texte);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navigation__lien:hover {
+  background-color: var(--couleur-surface-appuyee);
+  color: var(--couleur-texte);
+}
+
+.navigation__lien--actif {
+  color: var(--couleur-accent);
+  background-color: var(--couleur-surface-appuyee);
+}
+
+.preferences {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-xs);
+}
+
+/* ------------------------------ Sections --------------------------------- */
+
+.contenu-principal {
+  flex: 1 1 auto;
+}
+
+.section {
+  padding: var(--espace-xl) 0;
+}
+
+.section--alternee {
+  background-color: var(--couleur-fond-alterne);
+}
+
+.section__titre {
+  margin-bottom: var(--espace-s);
+}
+
+.section__sous-titre {
+  margin-top: var(--espace-l);
+  margin-bottom: var(--espace-xs);
+  font-size: 1.25rem;
+}
+
+.section__introduction {
+  max-width: 68ch;
+  color: var(--couleur-texte-discret);
+  margin-bottom: var(--espace-l);
+}
+
+.section__introduction--discrete {
+  font-size: 0.92rem;
+  margin-bottom: var(--espace-m);
+}
+
+/* ------------------------------ Banniere --------------------------------- */
+
+.banniere {
+  padding: var(--espace-xl) 0;
+  background-color: var(--couleur-fond-alterne);
+  background-image: radial-gradient(
+    circle at 15% 20%,
+    var(--couleur-voile-accent),
+    rgba(0, 0, 0, 0) 55%
+  );
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.banniere__interieur {
+  max-width: 74ch;
+}
+
+.banniere__surtitre {
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--couleur-accent);
+  margin-bottom: var(--espace-xs);
+}
+
+.banniere__texte {
+  font-size: 1.06rem;
+  color: var(--couleur-texte-discret);
+  margin-bottom: var(--espace-m);
+}
+
+.banniere__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-s);
+}
+
+/* ------------------------------- Grilles --------------------------------- */
+
+.grille {
+  display: grid;
+  gap: var(--espace-m);
+}
+
+.grille--trois {
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+}
+
+.grille--projets {
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+}
+
+.grille--membres {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.grille--chiffres {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* -------------------------------- Pied ----------------------------------- */
+
+.pied {
+  margin-top: auto;
+  padding: var(--espace-l) 0;
+  background-color: var(--couleur-surface);
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.pied__ligne {
+  margin-bottom: var(--espace-xs);
+}
+
+.pied__ligne--discrete {
+  color: var(--couleur-texte-discret);
+  font-size: 0.88rem;
+}
+
+/* --------------------- Adaptation aux formats mobiles -------------------- */
+
+@media (max-width: 760px) {
+  .entete__hamburger {
+    display: flex;
+  }
+
+  .navigation {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espace-s);
+    padding-top: var(--espace-s);
+  }
+
+  .navigation--ouverte {
+    display: flex;
+  }
+
+  .navigation__liste {
+    flex-direction: column;
+  }
+
+  .navigation__lien {
+    display: block;
+    padding: var(--espace-s);
+  }
+
+  .preferences {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .section {
+    padding: var(--espace-l) 0;
+  }
+}
+
+/* ===== composants.css ===== */
+/* ==========================================================================
+   composants.css — Boutons, cartes, etiquettes, formulaire, alertes,
+   indicateurs de chargement et statistiques.
+   ========================================================================== */
+
+/* ------------------------------- Boutons --------------------------------- */
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-xs);
+  padding: 0.62rem 1.05rem;
+  border: 1px solid transparent;
+  border-radius: var(--rayon-s);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--duree-transition) ease,
+    border-color var(--duree-transition) ease, transform var(--duree-transition) ease;
+}
+
+.bouton:active {
+  transform: translateY(1px);
+}
+
+.bouton[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bouton--principal {
+  background-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+}
+
+.bouton--principal:hover {
+  background-color: var(--couleur-accent-appuye);
+  color: var(--couleur-accent-contraste);
+}
+
+.bouton--secondaire {
+  background-color: transparent;
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent);
+}
+
+.bouton--secondaire:hover {
+  background-color: var(--couleur-surface-appuyee);
+}
+
+.bouton--discret {
+  background-color: var(--couleur-surface-appuyee);
+  color: var(--couleur-texte);
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.bouton--discret:hover {
+  background-color: var(--couleur-bordure);
+  color: var(--couleur-texte);
+}
+
+.bouton--icone {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 1.15rem;
+  background-color: var(--couleur-surface-appuyee);
+  color: var(--couleur-texte);
+}
+
+.bouton--filtre {
+  background-color: var(--couleur-surface);
+  border-color: var(--couleur-bordure);
+  color: var(--couleur-texte);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.9rem;
+}
+
+.bouton--filtre:hover {
+  background-color: var(--couleur-surface-appuyee);
+}
+
+.bouton--filtre-actif {
+  background-color: var(--couleur-accent);
+  border-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+}
+
+.lien-simple,
+.lien-externe {
+  font-weight: 600;
+}
+
+/* -------------------------------- Cartes --------------------------------- */
+
+.carte {
+  height: 100%;
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-m);
+  box-shadow: var(--ombre-basse);
+  overflow: hidden;
+  transition: box-shadow var(--duree-transition) ease,
+    transform var(--duree-transition) ease;
+}
+
+.carte:hover {
+  box-shadow: var(--ombre-moyenne);
+  transform: translateY(-2px);
+}
+
+.carte-competence {
+  padding: var(--espace-m);
+}
+
+.carte-competence__texte {
+  color: var(--couleur-texte-discret);
+  margin-bottom: 0;
+}
+
+.carte-chiffre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espace-m);
+  text-align: center;
+}
+
+.carte-chiffre__valeur {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--couleur-accent);
+  line-height: 1.1;
+}
+
+.carte-chiffre__intitule {
+  color: var(--couleur-texte-discret);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Carte membre */
+
+.carte-membre {
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-membre__photo {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background-color: var(--couleur-surface-appuyee);
+}
+
+.carte-membre__corps {
+  padding: var(--espace-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-xs);
+}
+
+.carte-membre__nom {
+  margin-bottom: 0;
+}
+
+.carte-membre__role {
+  color: var(--couleur-accent);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.carte-membre__bio {
+  color: var(--couleur-texte-discret);
+  font-size: 0.94rem;
+}
+
+.carte-membre__sous-titre {
+  margin: var(--espace-xs) 0 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--couleur-texte-discret);
+}
+
+.carte-membre__liens {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: var(--espace-s);
+}
+
+/* Carte projet */
+
+.carte-projet {
+  display: flex;
+  flex-direction: column;
+}
+
+.carte-projet__bandeau {
+  display: grid;
+  place-items: center;
+  height: 110px;
+}
+
+.carte-projet__initiales {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+}
+
+.carte-projet__corps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-xs);
+  padding: var(--espace-m);
+  flex: 1 1 auto;
+}
+
+.carte-projet__titre {
+  margin-bottom: 0;
+}
+
+.carte-projet__lien {
+  color: inherit;
+  text-decoration: none;
+}
+
+.carte-projet__lien:hover {
+  color: var(--couleur-accent);
+  text-decoration: underline;
+}
+
+.carte-projet__resume {
+  color: var(--couleur-texte-discret);
+  font-size: 0.94rem;
+}
+
+.carte-projet__pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-s);
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: var(--espace-s);
+}
+
+.carte-projet__annee {
+  color: var(--couleur-texte-discret);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------ Etiquettes ------------------------------- */
+
+.liste-etiquettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-xs);
+}
+
+.liste-etiquettes--large {
+  gap: var(--espace-s);
+}
+
+.etiquette {
+  display: inline-block;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 999px;
+  background-color: var(--couleur-surface-appuyee);
+  color: var(--couleur-texte);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.etiquette--grande {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.etiquette--sourdine {
+  background-color: transparent;
+  color: var(--couleur-texte-discret);
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+/* ------------------------------- Filtrage -------------------------------- */
+
+.filtre {
+  margin-bottom: var(--espace-m);
+}
+
+.filtre__intitule {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--couleur-texte-discret);
+  margin-bottom: var(--espace-xs);
+}
+
+.filtre__boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-xs);
+}
+
+.galerie__compteur {
+  color: var(--couleur-texte-discret);
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--espace-m);
+}
+
+.message-vide {
+  padding: var(--espace-l);
+  text-align: center;
+  border: 1px dashed var(--couleur-bordure);
+  border-radius: var(--rayon-m);
+  color: var(--couleur-texte-discret);
+}
+
+/* ------------------------------ Formulaire ------------------------------- */
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-s);
+  max-width: 620px;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0;
+}
+
+.champ__libelle {
+  font-weight: 600;
+}
+
+.champ__mention {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--couleur-texte-discret);
+}
+
+.champ__saisie {
+  width: 100%;
+  padding: 0.62rem 0.75rem;
+  font: inherit;
+  color: var(--couleur-texte);
+  background-color: var(--couleur-surface);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-s);
+  transition: border-color var(--duree-transition) ease;
+}
+
+.champ__saisie:hover {
+  border-color: var(--couleur-accent);
+}
+
+.champ__saisie--invalide {
+  border-color: var(--couleur-echec-texte);
+  border-width: 2px;
+}
+
+.champ__erreur {
+  color: var(--couleur-echec-texte);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.formulaire__compteur {
+  color: var(--couleur-texte-discret);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0;
+}
+
+.formulaire__actions {
+  margin-top: var(--espace-xs);
+  margin-bottom: 0;
+}
+
+/* -------------------------------- Alertes -------------------------------- */
+
+.alerte {
+  padding: var(--espace-s) var(--espace-m);
+  border-radius: var(--rayon-m);
+  border: 1px solid var(--couleur-bordure);
+  margin-bottom: var(--espace-m);
+}
+
+.alerte__texte {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.alerte__details {
+  margin-top: var(--espace-xs);
+  padding-left: var(--espace-m);
+}
+
+.alerte__details li {
+  list-style: disc;
+  font-size: 0.9rem;
+}
+
+.alerte--succes {
+  background-color: var(--couleur-succes-fond);
+  color: var(--couleur-succes-texte);
+}
+
+.alerte--echec {
+  background-color: var(--couleur-echec-fond);
+  color: var(--couleur-echec-texte);
+}
+
+.alerte--avertissement {
+  background-color: var(--couleur-avertissement-fond);
+  color: var(--couleur-avertissement-texte);
+  padding: var(--espace-s);
+  font-size: 0.88rem;
+}
+
+/* ------------------- Indicateur de chargement reseau --------------------- */
+
+.chargement {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-s);
+  padding: var(--espace-s) 0;
+  color: var(--couleur-texte-discret);
+  font-size: 0.9rem;
+}
+
+.chargement__rotor {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--couleur-bordure);
+  border-top-color: var(--couleur-accent);
+  border-radius: 50%;
+  animation: rotation 800ms linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ------------------------------ Statistiques ----------------------------- */
+
+.statistiques {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espace-xs);
+  margin: var(--espace-xs) 0 0;
+  padding: var(--espace-s);
+  background-color: var(--couleur-fond-alterne);
+  border-radius: var(--rayon-s);
+}
+
+.statistiques__element {
+  text-align: center;
+}
+
+.statistiques__intitule {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--couleur-texte-discret);
+}
+
+.statistiques__valeur {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.statistiques__valeur--texte {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ------------------------- Detail d'une realisation ---------------------- */
+
+.fil-ariane {
+  margin-bottom: var(--espace-s);
+}
+
+.detail__bandeau {
+  height: 8px;
+  border-radius: 999px;
+  margin-bottom: var(--espace-m);
+}
+
+.detail__actions {
+  margin-top: var(--espace-l);
+}
+
+.code-erreur {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--couleur-accent);
+  line-height: 1;
+  margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+  .statistiques {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .statistiques__element {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--espace-s);
+    text-align: left;
+  }
+}
+
+/* ===== styles propres a l'apercu de demonstration ===== */
+.bandeau-demo {
+  background-color: var(--couleur-avertissement-fond);
+  color: var(--couleur-avertissement-texte);
+  border-bottom: 1px solid var(--couleur-bordure);
+  font-size: 0.86rem;
+}
+.bandeau-demo__interieur { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+.bandeau-demo strong { font-weight: 700; }
+.note-demo {
+  margin: 0.35rem 0 0;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--couleur-texte-discret);
+  font-style: italic;
+}
+
+</style>
+</head>
+<body>
+<div id="racine"></div>
+<noscript>
+  <p style="padding:2rem;font-family:sans-serif;">
+    Cet apercu necessite l'activation de JavaScript dans votre navigateur.
+  </p>
+</noscript>
+<script>window.DONNEES = {"traductions":{"fr":{"nav.accueil":"Accueil","nav.equipe":"Équipe","nav.projets":"Projets","nav.contact":"Contact","nav.menu":"Menu principal","nav.evitement":"Aller au contenu principal","entete.titre":"Portfolio d’équipe","entete.sousTitre":"LOG3500 — ISTEAH","entete.themeClair":"Activer le mode clair","entete.themeSombre":"Activer le mode sombre","entete.langue":"Switch to English","accueil.surtitre":"Portfolio professionnel collectif","accueil.titre":"Nous concevons des applications Web full-stack","accueil.intro":"Ce portfolio est une application monopage React servie par un serveur Node.js/Express et déployée en continu sur Railway. Il présente notre équipe, nos compétences et nos réalisations du cours LOG3500.","accueil.ctaProjets":"Voir nos réalisations","accueil.ctaContact":"Nous écrire","accueil.competences":"Compétences collectives","accueil.pile":"Pile technologique","accueil.chiffres":"L’équipe en chiffres","accueil.chiffreMembres":"Membres","accueil.chiffreProjets":"Réalisations","accueil.chiffreTechnos":"Technologies","equipe.titre":"Notre équipe","equipe.intro":"Trois étudiants, trois ensembles de tâches complémentaires, un seul dépôt Git.","equipe.competences":"Compétences","equipe.profilGitHub":"Profil GitHub","equipe.statsTitre":"Activité GitHub en direct","equipe.statsIntro":"Données récupérées de façon asynchrone depuis l’API REST publique de GitHub.","equipe.depots":"Dépôts publics","equipe.abonnes":"Abonnés","equipe.membreDepuis":"Membre depuis","projets.titre":"Nos réalisations","projets.intro":"Galerie dynamique filtrable. Les devoirs 1 et 2 du cours y figurent aux côtés du projet de session.","projets.filtrer":"Filtrer par technologie","projets.tous":"Tous","projets.aucun":"Aucune réalisation ne correspond à ce filtre.","projets.voirDetails":"Voir les détails","projets.retour":"Retour à la galerie","projets.contexte":"Contexte","projets.contribution":"Contribution de l’équipe","projets.technologies":"Technologies","projets.depot":"Code source","projets.introuvable":"Cette réalisation est introuvable.","contact.titre":"Nous contacter","contact.intro":"Votre message est transmis en asynchrone au serveur Express, validé puis enregistré dans un fichier JSON. Aucune page n’est rechargée.","contact.nom":"Nom complet","contact.courriel":"Adresse de courriel","contact.sujet":"Sujet","contact.message":"Message","contact.envoyer":"Envoyer le message","contact.envoiEnCours":"Envoi en cours…","contact.obligatoire":"obligatoire","contact.erreurNom":"Veuillez saisir un nom d’au moins 2 caractères.","contact.erreurCourriel":"Veuillez saisir une adresse de courriel valide.","contact.erreurSujet":"Veuillez saisir un sujet d’au moins 3 caractères.","contact.erreurMessage":"Votre message doit contenir au moins 10 caractères.","contact.erreurReseau":"Le serveur est injoignable pour le moment. Veuillez réessayer.","contact.compteur":"caractères","commun.chargement":"Chargement des données…","commun.erreur":"Une erreur est survenue.","commun.reessayer":"Réessayer","nonTrouvee.titre":"Page introuvable","nonTrouvee.texte":"L’adresse demandée ne correspond à aucune section du portfolio.","nonTrouvee.retour":"Revenir à l’accueil","pied.droits":"Tous droits réservés.","pied.cours":"Projet de session — LOG3500, Conception et programmation de sites Web I","pied.institution":"ISTEAH — L’Université de la nouvelle Haïti"},"en":{"nav.accueil":"Home","nav.equipe":"Team","nav.projets":"Projects","nav.contact":"Contact","nav.menu":"Main menu","nav.evitement":"Skip to main content","entete.titre":"Team Portfolio","entete.sousTitre":"LOG3500 — ISTEAH","entete.themeClair":"Switch to light mode","entete.themeSombre":"Switch to dark mode","entete.langue":"Passer en français","accueil.surtitre":"Collective professional portfolio","accueil.titre":"We build full-stack web applications","accueil.intro":"This portfolio is a React single-page application served by a Node.js/Express server and continuously deployed on Railway. It showcases our team, our skills and our LOG3500 coursework.","accueil.ctaProjets":"See our work","accueil.ctaContact":"Get in touch","accueil.competences":"Collective skills","accueil.pile":"Technology stack","accueil.chiffres":"The team in numbers","accueil.chiffreMembres":"Members","accueil.chiffreProjets":"Projects","accueil.chiffreTechnos":"Technologies","equipe.titre":"Our team","equipe.intro":"Three students, three complementary task sets, a single Git repository.","equipe.competences":"Skills","equipe.profilGitHub":"GitHub profile","equipe.statsTitre":"Live GitHub activity","equipe.statsIntro":"Data fetched asynchronously from the public GitHub REST API.","equipe.depots":"Public repositories","equipe.abonnes":"Followers","equipe.membreDepuis":"Member since","projets.titre":"Our work","projets.intro":"A dynamic, filterable gallery. Assignments 1 and 2 sit alongside the term project.","projets.filtrer":"Filter by technology","projets.tous":"All","projets.aucun":"No project matches this filter.","projets.voirDetails":"View details","projets.retour":"Back to the gallery","projets.contexte":"Context","projets.contribution":"Team contribution","projets.technologies":"Technologies","projets.depot":"Source code","projets.introuvable":"This project could not be found.","contact.titre":"Contact us","contact.intro":"Your message is sent asynchronously to the Express server, validated, then stored in a JSON file. No page reload occurs.","contact.nom":"Full name","contact.courriel":"Email address","contact.sujet":"Subject","contact.message":"Message","contact.envoyer":"Send message","contact.envoiEnCours":"Sending…","contact.obligatoire":"required","contact.erreurNom":"Please enter a name of at least 2 characters.","contact.erreurCourriel":"Please enter a valid email address.","contact.erreurSujet":"Please enter a subject of at least 3 characters.","contact.erreurMessage":"Your message must contain at least 10 characters.","contact.erreurReseau":"The server is unreachable right now. Please try again.","contact.compteur":"characters","commun.chargement":"Loading data…","commun.erreur":"An error occurred.","commun.reessayer":"Try again","nonTrouvee.titre":"Page not found","nonTrouvee.texte":"The requested address matches no section of this portfolio.","nonTrouvee.retour":"Back to home","pied.droits":"All rights reserved.","pied.cours":"Term project — LOG3500, Web Site Design and Programming I","pied.institution":"ISTEAH — University of the New Haiti"}},"membres":[{"id":"membre-1","nom":"Fils Léonel Charles","role":{"fr":"Intégration sémantique, charte visuelle et accessibilité","en":"Semantic integration, visual identity and accessibility"},"ensembleTaches":"Ensemble de tâches 1","pseudoGitHub":"filsleonel","courriel":"leonel.charlesfils@gmail.com","photo":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20240%22%20role%3D%22img%22%20aria-label%3D%22Photo%20de%20profil%20a%20remplacer%22%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22240%22%20fill%3D%22%231d4ed8%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22160%22%20cy%3D%2296%22%20r%3D%2242%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M78%20226c0-45%2037-70%2082-70s82%2025%2082%2070z%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Ctext%20x%3D%22160%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%231d4ed8%22%20text-anchor%3D%22middle%22%3EMembre%201%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A","bio":{"fr":"Responsable de la structure HTML5 sémantique de tous les composants, de la mise en page responsive en CSS pur (Flexbox et Grid, sans framework) et de la conformité aux règles d'accessibilité numérique : contrastes, labels de formulaires et attributs ARIA. A également implémenté la bascule de styles visuels par variables CSS.","en":"Responsible for the semantic HTML5 structure of every component, the responsive layout in pure CSS (Flexbox and Grid, no framework) and compliance with digital accessibility rules: contrast, form labels and ARIA attributes. Also implemented the visual theme switch through CSS variables."},"competences":["HTML5 sémantique","CSS Grid","Flexbox","WCAG / ARIA","Design responsive"]},{"id":"membre-2","nom":"Prénom Nom (membre 2)","role":{"fr":"Architecture client, composants et routage React","en":"Client architecture, components and React routing"},"ensembleTaches":"Ensemble de tâches 2","pseudoGitHub":"facebook","courriel":"membre2@exemple.ht","photo":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20240%22%20role%3D%22img%22%20aria-label%3D%22Photo%20de%20profil%20a%20remplacer%22%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22240%22%20fill%3D%22%237c3aed%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22160%22%20cy%3D%2296%22%20r%3D%2242%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M78%20226c0-45%2037-70%2082-70s82%2025%2082%2070z%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Ctext%20x%3D%22160%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%237c3aed%22%20text-anchor%3D%22middle%22%3EMembre%202%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A","bio":{"fr":"A initialisé l'application avec Vite et défini l'arborescence des répertoires. A programmé et empaqueté l'ensemble des composants graphiques (cartes, menus, boutons), configuré le routeur React Router v6 et développé la validation dynamique côté client du formulaire de contact.","en":"Initialised the application with Vite and defined the directory tree. Built and packaged all graphical components (cards, menus, buttons), configured the React Router v6 router and developed the dynamic client-side validation of the contact form."},"competences":["React 18","Vite","React Router v6","Hooks","Composants réutilisables"]},{"id":"membre-3","nom":"Prénom Nom (membre 3)","role":{"fr":"Développement serveur, interconnexion API et DevOps","en":"Server development, API integration and DevOps"},"ensembleTaches":"Ensemble de tâches 3","pseudoGitHub":"expressjs","courriel":"membre3@exemple.ht","photo":"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20240%22%20role%3D%22img%22%20aria-label%3D%22Photo%20de%20profil%20a%20remplacer%22%3E%0A%20%20%3Crect%20width%3D%22320%22%20height%3D%22240%22%20fill%3D%22%230891b2%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22160%22%20cy%3D%2296%22%20r%3D%2242%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M78%20226c0-45%2037-70%2082-70s82%2025%2082%2070z%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.92%22%2F%3E%0A%20%20%3Ctext%20x%3D%22160%22%20y%3D%22232%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%230891b2%22%20text-anchor%3D%22middle%22%3EMembre%203%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A","bio":{"fr":"A programmé le serveur d'application Node.js/Express, créé la route POST /api/contact et géré la persistance des messages dans un fichier JSON local. Assure la gestion du dépôt Git (résolution des conflits, revues de code, fusions) et le déploiement continu sur Railway.","en":"Built the Node.js/Express application server, created the POST /api/contact route and handled message persistence in a local JSON file. Manages the Git repository (conflict resolution, code reviews, merges) and continuous deployment on Railway."},"competences":["Node.js","Express","API REST","Git / GitHub","Railway / CI-CD"]}],"competencesCollectives":[{"id":"frontend","titre":{"fr":"Développement frontend","en":"Frontend development"},"description":{"fr":"Composants React modulaires, hooks useState et useEffect, navigation sans rechargement avec React Router v6.","en":"Modular React components, useState and useEffect hooks, reload-free navigation with React Router v6."}},{"id":"integration","titre":{"fr":"Intégration et accessibilité","en":"Integration and accessibility"},"description":{"fr":"HTML5 sémantique validé par le W3C, mise en page CSS pure en Flexbox et Grid, contrastes et attributs ARIA vérifiés.","en":"W3C-validated semantic HTML5, pure CSS layout with Flexbox and Grid, verified contrast ratios and ARIA attributes."}},{"id":"backend","titre":{"fr":"Développement serveur","en":"Server development"},"description":{"fr":"Serveur Node.js/Express, routes API REST, validation des données reçues et persistance dans un fichier JSON.","en":"Node.js/Express server, REST API routes, validation of incoming data and persistence in a JSON file."}},{"id":"devops","titre":{"fr":"Pratiques DevOps","en":"DevOps practices"},"description":{"fr":"Versionnage collaboratif sous Git et GitHub, planification sur GitHub Projects, déploiement automatisé sur Railway.","en":"Collaborative versioning with Git and GitHub, planning on GitHub Projects, automated deployment on Railway."}}],"pileTechnologique":["React 18","React Router v6","Context API","Vite","JavaScript ES2022","HTML5","CSS3 (Flexbox / Grid)","Node.js","Express","API REST GitHub","Git / GitHub","Railway"],"projets":[{"id":"devoir-1","titre":{"fr":"Devoir 1 — Site statique sémantique","en":"Assignment 1 — Semantic static site"},"resume":{"fr":"Site multipage en HTML5 et CSS3 pur, validé par le W3C et adapté aux écrans mobiles.","en":"Multi-page site in pure HTML5 and CSS3, W3C-validated and adapted to mobile screens."},"contexte":{"fr":"Premier devoir du cours LOG3500. L'objectif était de maîtriser la structure sémantique d'un document HTML5 et la mise en page en CSS pur, sans recours à un framework. Chaque page respecte la hiérarchie des titres et les repères de navigation.","en":"First assignment of the LOG3500 course. The goal was to master the semantic structure of an HTML5 document and pure CSS layout, without resorting to a framework. Every page respects heading hierarchy and navigation landmarks."},"contribution":{"fr":"Rédaction du balisage sémantique, conception de la grille responsive et vérification des contrastes de couleurs.","en":"Semantic markup, responsive grid design and colour-contrast verification."},"technologies":["HTML5","CSS3","Accessibilité"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/devoir-1","couleur":"#2563eb"},{"id":"devoir-2","titre":{"fr":"Devoir 2 — Interactivité JavaScript","en":"Assignment 2 — JavaScript interactivity"},"resume":{"fr":"Manipulation du DOM, gestion des événements et validation de formulaires en JavaScript natif.","en":"DOM manipulation, event handling and form validation in vanilla JavaScript."},"contexte":{"fr":"Deuxième devoir du cours. L'application ajoute une couche d'interactivité au site du devoir 1 : filtrage de contenus, validation de saisies et affichage conditionnel, sans bibliothèque tierce.","en":"Second assignment. The application adds an interactivity layer to the assignment 1 site: content filtering, input validation and conditional display, without third-party libraries."},"contribution":{"fr":"Écriture des gestionnaires d’événements, des fonctions de validation et de la logique de filtrage.","en":"Event handlers, validation functions and filtering logic."},"technologies":["JavaScript ES2022","DOM","HTML5"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/devoir-2","couleur":"#7c3aed"},{"id":"projet-session","titre":{"fr":"Projet de session — Portfolio full-stack","en":"Term project — Full-stack portfolio"},"resume":{"fr":"Application monopage React servie par Express, déployée en continu sur Railway.","en":"React single-page application served by Express, continuously deployed on Railway."},"contexte":{"fr":"Le présent portfolio. Il réunit un client React construit avec Vite (composants modulaires, React Router v6, Context API) et un serveur Node.js/Express qui sert le build de production et intercepte le formulaire de contact.","en":"This very portfolio. It combines a React client built with Vite (modular components, React Router v6, Context API) and a Node.js/Express server that serves the production build and intercepts the contact form."},"contribution":{"fr":"Travail collectif : intégration et accessibilité, architecture des composants et routage, serveur Express et déploiement continu.","en":"Collective work: integration and accessibility, component architecture and routing, Express server and continuous deployment."},"technologies":["React 18","Vite","React Router v6","Node.js","Express","Railway"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/portfolio-log3500","couleur":"#0891b2"},{"id":"api-github","titre":{"fr":"Passerelle API GitHub","en":"GitHub API gateway"},"resume":{"fr":"Module de récupération asynchrone des statistiques publiques des dépôts de l’équipe.","en":"Asynchronous fetching module for the team’s public repository statistics."},"contexte":{"fr":"Crochet React dédié qui interroge l'API REST publique de GitHub avec fetch et useEffect. Il gère les trois états d'un appel réseau (chargement, succès, erreur) et annule proprement la requête si le composant est démonté.","en":"A dedicated React hook querying the public GitHub REST API with fetch and useEffect. It handles the three states of a network call (loading, success, error) and cleanly aborts the request if the component unmounts."},"contribution":{"fr":"Conception du crochet useStatistiquesGitHub, gestion des états réseau et des indicateurs de chargement.","en":"Design of the useStatistiquesGitHub hook, network state handling and loading indicators."},"technologies":["API REST GitHub","JavaScript ES2022","React 18"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/portfolio-log3500","couleur":"#059669"},{"id":"serveur-contact","titre":{"fr":"Service de contact Express","en":"Express contact service"},"resume":{"fr":"Route POST validée et persistance de l’historique des messages dans un fichier JSON.","en":"Validated POST route and message-history persistence in a JSON file."},"contexte":{"fr":"Route POST /api/contact du serveur d'application. Elle vérifie la présence et le format des champs reçus (dont l'adresse de courriel), rejette les charges invalides avec un code 400 explicite et ajoute les messages valides à messages.json.","en":"The application server’s POST /api/contact route. It checks the presence and format of the received fields (including the email address), rejects invalid payloads with an explicit 400 code and appends valid messages to messages.json."},"contribution":{"fr":"Développement de la route, des fonctions de validation serveur et de la couche de persistance sur le système de fichiers.","en":"Route development, server-side validation functions and the file-system persistence layer."},"technologies":["Node.js","Express","API REST"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/portfolio-log3500","couleur":"#d97706"},{"id":"chaine-deploiement","titre":{"fr":"Chaîne de déploiement Railway","en":"Railway deployment pipeline"},"resume":{"fr":"Build et déploiement automatiques à chaque intégration sur la branche principale.","en":"Automatic build and deployment on every push to the main branch."},"contexte":{"fr":"La plateforme Railway est connectée au dépôt GitHub public de l'équipe. Chaque commit poussé sur main déclenche « npm run build » puis « npm start », le serveur écoutant sur le port dynamique fourni par l'hôte.","en":"The Railway platform is connected to the team’s public GitHub repository. Every commit pushed to main triggers \"npm run build\" then \"npm start\", with the server listening on the dynamic port provided by the host."},"contribution":{"fr":"Configuration de l’hébergement, des variables d’environnement et de l’automatisation du build.","en":"Hosting configuration, environment variables and build automation."},"technologies":["Railway","Git / GitHub","Node.js"],"annee":2026,"lienDepot":"https://github.com/ORGANISATION/portfolio-log3500","couleur":"#be123c"}]};</script>
+<script>
+/* ==========================================================================
+   DEMO AUTONOME — Portfolio LOG3500
+   Ce fichier reproduit l'interface du projet en JavaScript natif, sans React
+   ni serveur, uniquement pour permettre un apercu par double-clic.
+   Il n'est PAS le livrable du projet : le livrable est l'application React
+   du dossier portfolio-log3500/.
+   Comme dans le projet, aucune insertion de HTML brut n'est utilisee :
+   tout le texte est place par la propriete textContent.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var D = window.DONNEES;
+  var MODE_FICHIER = window.location.protocol === 'file:';
+
+  /* ---------------------------- Etat global ---------------------------- */
+
+  var etat = {
+    theme: 'clair',
+    langue: 'fr',
+    filtre: 'tous',
+    menuOuvert: false
+  };
+
+  function t(cle) {
+    var dictionnaire = D.traductions[etat.langue] || D.traductions.fr;
+    return Object.prototype.hasOwnProperty.call(dictionnaire, cle)
+      ? dictionnaire[cle]
+      : cle;
+  }
+
+  /* --------------------- Fabrique d'elements du DOM --------------------- */
+
+  /**
+   * Cree un element. Le texte est toujours pose par textContent : aucune
+   * chaine n'est interpretee comme du balisage.
+   * @param {string} balise
+   * @param {object} options {classe, texte, attrs, sur}
+   * @param {Array} enfants
+   */
+  function e(balise, options, enfants) {
+    var noeud = document.createElement(balise);
+    options = options || {};
+
+    if (options.classe) noeud.className = options.classe;
+    if (options.texte !== undefined) noeud.textContent = String(options.texte);
+
+    if (options.attrs) {
+      Object.keys(options.attrs).forEach(function (nom) {
+        var valeur = options.attrs[nom];
+        if (valeur !== null && valeur !== undefined && valeur !== false) {
+          noeud.setAttribute(nom, String(valeur));
+        }
+      });
+    }
+
+    if (options.sur) {
+      Object.keys(options.sur).forEach(function (evenement) {
+        noeud.addEventListener(evenement, options.sur[evenement]);
+      });
+    }
+
+    (enfants || []).forEach(function (enfant) {
+      if (enfant) noeud.appendChild(enfant);
+    });
+
+    return noeud;
+  }
+
+  function vider(noeud) {
+    while (noeud.firstChild) noeud.removeChild(noeud.firstChild);
+  }
+
+  /* ------------------------------ Routage ------------------------------ */
+  /* Le routage se fait par fragment (#/equipe) : c'est la seule technique   */
+  /* qui fonctionne en protocole file://. Le projet React utilise, lui, de   */
+  /* vraies adresses (/equipe) grace a React Router v6 et au repli Express.  */
+
+  function routeCourante() {
+    var brut = window.location.hash.replace(/^#\/?/, '');
+    var segments = brut.split('/').filter(Boolean);
+    if (segments.length === 0) return { nom: 'accueil' };
+    if (segments[0] === 'equipe') return { nom: 'equipe' };
+    if (segments[0] === 'projets' && segments[1]) {
+      return { nom: 'detail', identifiant: segments[1] };
+    }
+    if (segments[0] === 'projets') return { nom: 'projets' };
+    if (segments[0] === 'contact') return { nom: 'contact' };
+    return { nom: 'introuvable' };
+  }
+
+  function cheminDeRoute(nom) {
+    return nom === 'accueil' ? '#/' : '#/' + nom;
+  }
+
+  /* ------------------------------- Entete ------------------------------ */
+
+  function construireEntete() {
+    var route = routeCourante();
+
+    var liens = [
+      { vers: 'accueil', cle: 'nav.accueil' },
+      { vers: 'equipe', cle: 'nav.equipe' },
+      { vers: 'projets', cle: 'nav.projets' },
+      { vers: 'contact', cle: 'nav.contact' }
+    ];
+
+    var listeLiens = e(
+      'ul',
+      { classe: 'navigation__liste' },
+      liens.map(function (lien) {
+        var actif =
+          route.nom === lien.vers ||
+          (lien.vers === 'projets' && route.nom === 'detail');
+
+        var a = e('a', {
+          classe: 'navigation__lien' + (actif ? ' navigation__lien--actif' : ''),
+          texte: t(lien.cle),
+          attrs: {
+            href: cheminDeRoute(lien.vers),
+            'aria-current': actif ? 'page' : null
+          },
+          sur: {
+            click: function () {
+              etat.menuOuvert = false;
+            }
+          }
+        });
+
+        return e('li', { classe: 'navigation__element' }, [a]);
+      })
+    );
+
+    var boutonLangue = e('button', {
+      classe: 'bouton bouton--discret',
+      texte: t('entete.langue'),
+      attrs: { type: 'button', lang: etat.langue === 'fr' ? 'en' : 'fr' },
+      sur: {
+        click: function () {
+          etat.langue = etat.langue === 'fr' ? 'en' : 'fr';
+          document.documentElement.setAttribute('lang', etat.langue);
+          rendre();
+        }
+      }
+    });
+
+    var sombre = etat.theme === 'sombre';
+    var icone = e('span', {
+      texte: sombre ? '☀' : '☾',
+      attrs: { 'aria-hidden': 'true' }
+    });
+
+    var boutonTheme = e(
+      'button',
+      {
+        classe: 'bouton bouton--icone',
+        attrs: {
+          type: 'button',
+          'aria-pressed': String(sombre),
+          'aria-label': sombre ? t('entete.themeClair') : t('entete.themeSombre'),
+          title: sombre ? t('entete.themeClair') : t('entete.themeSombre')
+        },
+        sur: {
+          click: function () {
+            etat.theme = sombre ? 'clair' : 'sombre';
+            document.documentElement.setAttribute('data-theme', etat.theme);
+            rendre();
+          }
+        }
+      },
+      [icone]
+    );
+
+    var navigation = e(
+      'nav',
+      {
+        classe: 'navigation' + (etat.menuOuvert ? ' navigation--ouverte' : ''),
+        attrs: { id: 'navigation-principale', 'aria-label': t('nav.menu') }
+      },
+      [
+        listeLiens,
+        e('div', { classe: 'preferences' }, [boutonLangue, boutonTheme])
+      ]
+    );
+
+    var hamburger = e(
+      'button',
+      {
+        classe: 'entete__hamburger',
+        attrs: {
+          type: 'button',
+          'aria-expanded': String(etat.menuOuvert),
+          'aria-controls': 'navigation-principale',
+          'aria-label': t('nav.menu')
+        },
+        sur: {
+          click: function () {
+            etat.menuOuvert = !etat.menuOuvert;
+            rendre();
+          }
+        }
+      },
+      [
+        e('span', { classe: 'entete__barre', attrs: { 'aria-hidden': 'true' } }),
+        e('span', { classe: 'entete__barre', attrs: { 'aria-hidden': 'true' } }),
+        e('span', { classe: 'entete__barre', attrs: { 'aria-hidden': 'true' } })
+      ]
+    );
+
+    var marque = e(
+      'a',
+      { classe: 'entete__marque', attrs: { href: '#/' } },
+      [
+        e('span', {
+          classe: 'entete__logo',
+          texte: '</>',
+          attrs: { 'aria-hidden': 'true' }
+        }),
+        e('span', { classe: 'entete__textes' }, [
+          e('span', { classe: 'entete__titre', texte: t('entete.titre') }),
+          e('span', { classe: 'entete__sous-titre', texte: t('entete.sousTitre') })
+        ])
+      ]
+    );
+
+    return e('header', { classe: 'entete', attrs: { role: 'banner' } }, [
+      e('div', { classe: 'entete__interieur conteneur' }, [
+        marque,
+        hamburger,
+        navigation
+      ])
+    ]);
+  }
+
+  /* -------------------------------- Pied ------------------------------- */
+
+  function construirePied() {
+    return e('footer', { classe: 'pied', attrs: { role: 'contentinfo' } }, [
+      e('div', { classe: 'pied__interieur conteneur' }, [
+        e('p', { classe: 'pied__ligne' }, [
+          e('strong', { texte: t('entete.titre') }),
+          document.createTextNode(' — ' + t('pied.institution'))
+        ]),
+        e('p', {
+          classe: 'pied__ligne pied__ligne--discrete',
+          texte: t('pied.cours')
+        }),
+        e('p', {
+          classe: 'pied__ligne pied__ligne--discrete',
+          texte: '© ' + new Date().getFullYear() + ' — ' + t('pied.droits')
+        })
+      ])
+    ]);
+  }
+
+  /* ------------------------- Composants communs ------------------------ */
+
+  function etiquettes(liste, grande) {
+    return e(
+      'ul',
+      { classe: 'liste-etiquettes' + (grande ? ' liste-etiquettes--large' : '') },
+      liste.map(function (valeur) {
+        return e('li', {
+          classe: 'etiquette' + (grande ? ' etiquette--grande' : ''),
+          texte: valeur
+        });
+      })
+    );
+  }
+
+  function indicateurChargement(libelle) {
+    return e(
+      'div',
+      { classe: 'chargement', attrs: { role: 'status', 'aria-live': 'polite' } },
+      [
+        e('span', { classe: 'chargement__rotor', attrs: { 'aria-hidden': 'true' } }),
+        e('span', {
+          classe: 'chargement__texte',
+          texte: libelle || t('commun.chargement')
+        })
+      ]
+    );
+  }
+
+  /* ------------------------------ Accueil ------------------------------ */
+
+  function pageAccueil() {
+    var chiffres = [
+      { valeur: D.membres.length, cle: 'accueil.chiffreMembres' },
+      { valeur: D.projets.length, cle: 'accueil.chiffreProjets' },
+      { valeur: D.pileTechnologique.length, cle: 'accueil.chiffreTechnos' }
+    ];
+
+    var banniere = e(
+      'section',
+      { classe: 'banniere', attrs: { 'aria-labelledby': 'titre-accueil' } },
+      [
+        e('div', { classe: 'conteneur banniere__interieur' }, [
+          e('p', { classe: 'banniere__surtitre', texte: t('accueil.surtitre') }),
+          e('h1', {
+            classe: 'banniere__titre',
+            texte: t('accueil.titre'),
+            attrs: { id: 'titre-accueil' }
+          }),
+          e('p', { classe: 'banniere__texte', texte: t('accueil.intro') }),
+          e('p', { classe: 'banniere__actions' }, [
+            e('a', {
+              classe: 'bouton bouton--principal',
+              texte: t('accueil.ctaProjets'),
+              attrs: { href: '#/projets' }
+            }),
+            e('a', {
+              classe: 'bouton bouton--secondaire',
+              texte: t('accueil.ctaContact'),
+              attrs: { href: '#/contact' }
+            })
+          ])
+        ])
+      ]
+    );
+
+    var sectionChiffres = e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-chiffres' } },
+      [
+        e('div', { classe: 'conteneur' }, [
+          e('h2', {
+            classe: 'section__titre',
+            texte: t('accueil.chiffres'),
+            attrs: { id: 'titre-chiffres' }
+          }),
+          e(
+            'ul',
+            { classe: 'grille grille--chiffres' },
+            chiffres.map(function (item) {
+              return e('li', { classe: 'carte carte-chiffre' }, [
+                e('span', { classe: 'carte-chiffre__valeur', texte: item.valeur }),
+                e('span', { classe: 'carte-chiffre__intitule', texte: t(item.cle) })
+              ]);
+            })
+          )
+        ])
+      ]
+    );
+
+    var sectionCompetences = e(
+      'section',
+      {
+        classe: 'section section--alternee',
+        attrs: { 'aria-labelledby': 'titre-competences' }
+      },
+      [
+        e('div', { classe: 'conteneur' }, [
+          e('h2', {
+            classe: 'section__titre',
+            texte: t('accueil.competences'),
+            attrs: { id: 'titre-competences' }
+          }),
+          e(
+            'ul',
+            { classe: 'grille grille--trois' },
+            D.competencesCollectives.map(function (competence) {
+              return e('li', { classe: 'carte carte-competence' }, [
+                e('h3', {
+                  classe: 'carte-competence__titre',
+                  texte: competence.titre[etat.langue]
+                }),
+                e('p', {
+                  classe: 'carte-competence__texte',
+                  texte: competence.description[etat.langue]
+                })
+              ]);
+            })
+          )
+        ])
+      ]
+    );
+
+    var sectionPile = e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-pile' } },
+      [
+        e('div', { classe: 'conteneur' }, [
+          e('h2', {
+            classe: 'section__titre',
+            texte: t('accueil.pile'),
+            attrs: { id: 'titre-pile' }
+          }),
+          etiquettes(D.pileTechnologique, true)
+        ])
+      ]
+    );
+
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(banniere);
+    fragment.appendChild(sectionChiffres);
+    fragment.appendChild(sectionCompetences);
+    fragment.appendChild(sectionPile);
+    return fragment;
+  }
+
+  /* ------------------------------- Equipe ------------------------------ */
+
+  function blocStatistiques(membre) {
+    var conteneur = e('div', {});
+    conteneur.appendChild(indicateurChargement());
+
+    if (typeof window.fetch !== 'function') {
+      vider(conteneur);
+      conteneur.appendChild(messageStatsIndisponibles('fetch indisponible'));
+      return conteneur;
+    }
+
+    window
+      .fetch('https://api.github.com/users/' + encodeURIComponent(membre.pseudoGitHub), {
+        headers: { Accept: 'application/vnd.github+json' }
+      })
+      .then(function (reponse) {
+        if (!reponse.ok) throw new Error('HTTP ' + reponse.status);
+        return reponse.json();
+      })
+      .then(function (charge) {
+        var dateInscription = new Date(charge.created_at).toLocaleDateString(
+          etat.langue === 'fr' ? 'fr-CA' : 'en-CA',
+          { year: 'numeric', month: 'long' }
+        );
+
+        var elements = [
+          { intitule: t('equipe.depots'), valeur: charge.public_repos, texte: false },
+          { intitule: t('equipe.abonnes'), valeur: charge.followers, texte: false },
+          { intitule: t('equipe.membreDepuis'), valeur: dateInscription, texte: true }
+        ];
+
+        vider(conteneur);
+        conteneur.appendChild(
+          e(
+            'dl',
+            { classe: 'statistiques' },
+            elements.map(function (item) {
+              return e('div', { classe: 'statistiques__element' }, [
+                e('dt', { classe: 'statistiques__intitule', texte: item.intitule }),
+                e('dd', {
+                  classe:
+                    'statistiques__valeur' +
+                    (item.texte ? ' statistiques__valeur--texte' : ''),
+                  texte: item.valeur
+                })
+              ]);
+            })
+          )
+        );
+      })
+      .catch(function (exception) {
+        vider(conteneur);
+        conteneur.appendChild(messageStatsIndisponibles(exception.message));
+      });
+
+    return conteneur;
+  }
+
+  /**
+   * En protocole file://, l'origine de la page vaut « null » : l'API de GitHub
+   * refuse alors la requete (politique d'origine croisee). Plutot que d'afficher
+   * une erreur brute, l'apercu montre des valeurs d'exemple clairement
+   * identifiees comme telles. Une fois le projet React servi par Vite ou par
+   * Express, l'appel reel fonctionne et affiche les vraies statistiques.
+   */
+  function messageStatsIndisponibles(detail) {
+    var exemples = [
+      { intitule: t('equipe.depots'), valeur: '—', texte: false },
+      { intitule: t('equipe.abonnes'), valeur: '—', texte: false },
+      { intitule: t('equipe.membreDepuis'), valeur: '—', texte: true }
+    ];
+
+    var bloc = e('div', {});
+
+    bloc.appendChild(
+      e(
+        'dl',
+        { classe: 'statistiques' },
+        exemples.map(function (item) {
+          return e('div', { classe: 'statistiques__element' }, [
+            e('dt', { classe: 'statistiques__intitule', texte: item.intitule }),
+            e('dd', {
+              classe:
+                'statistiques__valeur' +
+                (item.texte ? ' statistiques__valeur--texte' : ''),
+              texte: item.valeur
+            })
+          ]);
+        })
+      )
+    );
+
+    bloc.appendChild(
+      e('p', {
+        classe: 'note-demo',
+        attrs: { role: 'status' },
+        texte:
+          etat.langue === 'fr'
+            ? 'Statistiques non chargées en mode fichier — l’API GitHub refuse les appels d’origine « null ». Elles s’affichent normalement dès que le projet est servi par npm run dev. (' +
+              detail +
+              ')'
+            : 'Statistics not loaded in file mode — the GitHub API rejects requests from a "null" origin. They display normally once the project is served by npm run dev. (' +
+              detail +
+              ')'
+      })
+    );
+
+    return bloc;
+  }
+
+  function carteMembre(membre) {
+    return e('article', { classe: 'carte carte-membre' }, [
+      e('img', {
+        classe: 'carte-membre__photo',
+        attrs: {
+          src: membre.photo,
+          alt: 'Portrait de ' + membre.nom,
+          width: '160',
+          height: '160'
+        }
+      }),
+      e('div', { classe: 'carte-membre__corps' }, [
+        e('h3', { classe: 'carte-membre__nom', texte: membre.nom }),
+        e('p', { classe: 'carte-membre__role', texte: membre.role[etat.langue] }),
+        e('p', {
+          classe: 'etiquette etiquette--sourdine',
+          texte: membre.ensembleTaches
+        }),
+        e('p', { classe: 'carte-membre__bio', texte: membre.bio[etat.langue] }),
+        e('h4', {
+          classe: 'carte-membre__sous-titre',
+          texte: t('equipe.competences')
+        }),
+        etiquettes(membre.competences),
+        blocStatistiques(membre),
+        e('p', { classe: 'carte-membre__liens' }, [
+          e('a', {
+            classe: 'lien-externe',
+            texte: t('equipe.profilGitHub'),
+            attrs: {
+              href: 'https://github.com/' + membre.pseudoGitHub,
+              target: '_blank',
+              rel: 'noopener noreferrer'
+            }
+          })
+        ])
+      ])
+    ]);
+  }
+
+  function pageEquipe() {
+    return e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-equipe' } },
+      [
+        e('div', { classe: 'conteneur' }, [
+          e('h1', {
+            classe: 'section__titre',
+            texte: t('equipe.titre'),
+            attrs: { id: 'titre-equipe' }
+          }),
+          e('p', { classe: 'section__introduction', texte: t('equipe.intro') }),
+          e('h2', { classe: 'section__sous-titre', texte: t('equipe.statsTitre') }),
+          e('p', {
+            classe: 'section__introduction section__introduction--discrete',
+            texte: t('equipe.statsIntro')
+          }),
+          e(
+            'ul',
+            { classe: 'grille grille--membres' },
+            D.membres.map(function (membre) {
+              return e('li', {}, [carteMembre(membre)]);
+            })
+          )
+        ])
+      ]
+    );
+  }
+
+  /* ------------------------------ Projets ------------------------------ */
+
+  function listerTechnologies() {
+    var ensemble = {};
+    D.projets.forEach(function (projet) {
+      projet.technologies.forEach(function (techno) {
+        ensemble[techno] = true;
+      });
+    });
+    return Object.keys(ensemble).sort(function (a, b) {
+      return a.localeCompare(b, 'fr');
+    });
+  }
+
+  function carteProjet(projet) {
+    var bandeau = e(
+      'div',
+      { classe: 'carte-projet__bandeau', attrs: { 'aria-hidden': 'true' } },
+      [
+        e('span', {
+          classe: 'carte-projet__initiales',
+          texte: projet.titre[etat.langue].slice(0, 2).toUpperCase()
+        })
+      ]
+    );
+    bandeau.style.backgroundColor = projet.couleur;
+
+    return e('article', { classe: 'carte carte-projet' }, [
+      bandeau,
+      e('div', { classe: 'carte-projet__corps' }, [
+        e('h3', { classe: 'carte-projet__titre' }, [
+          e('a', {
+            classe: 'carte-projet__lien',
+            texte: projet.titre[etat.langue],
+            attrs: { href: '#/projets/' + projet.id }
+          })
+        ]),
+        e('p', {
+          classe: 'carte-projet__resume',
+          texte: projet.resume[etat.langue]
+        }),
+        etiquettes(projet.technologies),
+        e('p', { classe: 'carte-projet__pied' }, [
+          e('a', {
+            classe: 'bouton bouton--discret',
+            texte: t('projets.voirDetails'),
+            attrs: { href: '#/projets/' + projet.id }
+          }),
+          e('span', { classe: 'carte-projet__annee', texte: projet.annee })
+        ])
+      ])
+    ]);
+  }
+
+  function pageProjets() {
+    var technologies = listerTechnologies();
+    var options = [t('projets.tous')].concat(technologies);
+
+    var boutons = e(
+      'div',
+      {
+        classe: 'filtre__boutons',
+        attrs: { role: 'toolbar', 'aria-labelledby': 'intitule-filtre' }
+      },
+      options.map(function (option, index) {
+        var valeur = index === 0 ? 'tous' : option;
+        var actif = etat.filtre === valeur;
+        return e('button', {
+          classe: 'bouton bouton--filtre' + (actif ? ' bouton--filtre-actif' : ''),
+          texte: option,
+          attrs: { type: 'button', 'aria-pressed': String(actif) },
+          sur: {
+            click: function () {
+              etat.filtre = valeur;
+              rendre();
+            }
+          }
+        });
+      })
+    );
+
+    var affiches =
+      etat.filtre === 'tous'
+        ? D.projets
+        : D.projets.filter(function (projet) {
+            return projet.technologies.indexOf(etat.filtre) !== -1;
+          });
+
+    var galerie =
+      affiches.length === 0
+        ? e('p', { classe: 'message-vide', texte: t('projets.aucun') })
+        : e(
+            'ul',
+            { classe: 'grille grille--projets' },
+            affiches.map(function (projet) {
+              return e('li', {}, [carteProjet(projet)]);
+            })
+          );
+
+    return e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-projets' } },
+      [
+        e('div', { classe: 'conteneur' }, [
+          e('h1', {
+            classe: 'section__titre',
+            texte: t('projets.titre'),
+            attrs: { id: 'titre-projets' }
+          }),
+          e('p', { classe: 'section__introduction', texte: t('projets.intro') }),
+          e('div', { classe: 'filtre' }, [
+            e('h2', {
+              classe: 'filtre__intitule',
+              texte: t('projets.filtrer'),
+              attrs: { id: 'intitule-filtre' }
+            }),
+            boutons
+          ]),
+          e('p', {
+            classe: 'galerie__compteur',
+            texte: affiches.length + ' / ' + D.projets.length,
+            attrs: { role: 'status', 'aria-live': 'polite' }
+          }),
+          galerie
+        ])
+      ]
+    );
+  }
+
+  function pageDetail(identifiant) {
+    var projet = null;
+    D.projets.forEach(function (candidat) {
+      if (candidat.id === identifiant) projet = candidat;
+    });
+
+    if (!projet) {
+      return e(
+        'section',
+        { classe: 'section', attrs: { 'aria-labelledby': 'titre-introuvable' } },
+        [
+          e('div', { classe: 'conteneur' }, [
+            e('h1', {
+              classe: 'section__titre',
+              texte: t('projets.introuvable'),
+              attrs: { id: 'titre-introuvable' }
+            }),
+            e('p', {}, [
+              e('a', {
+                classe: 'bouton bouton--principal',
+                texte: t('projets.retour'),
+                attrs: { href: '#/projets' }
+              })
+            ])
+          ])
+        ]
+      );
+    }
+
+    var bandeau = e('div', {
+      classe: 'detail__bandeau',
+      attrs: { 'aria-hidden': 'true' }
+    });
+    bandeau.style.backgroundColor = projet.couleur;
+
+    return e(
+      'article',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-detail' } },
+      [
+        e('div', { classe: 'conteneur conteneur--etroit' }, [
+          e('p', { classe: 'fil-ariane' }, [
+            e('a', {
+              classe: 'lien-simple',
+              texte: '← ' + t('projets.retour'),
+              attrs: { href: '#/projets' }
+            })
+          ]),
+          bandeau,
+          e('h1', {
+            classe: 'section__titre',
+            texte: projet.titre[etat.langue],
+            attrs: { id: 'titre-detail' }
+          }),
+          e('p', {
+            classe: 'section__introduction',
+            texte: projet.resume[etat.langue]
+          }),
+          e('h2', { classe: 'section__sous-titre', texte: t('projets.contexte') }),
+          e('p', { texte: projet.contexte[etat.langue] }),
+          e('h2', {
+            classe: 'section__sous-titre',
+            texte: t('projets.contribution')
+          }),
+          e('p', { texte: projet.contribution[etat.langue] }),
+          e('h2', {
+            classe: 'section__sous-titre',
+            texte: t('projets.technologies')
+          }),
+          etiquettes(projet.technologies),
+          e('p', { classe: 'detail__actions' }, [
+            e('a', {
+              classe: 'bouton bouton--principal',
+              texte: t('projets.depot'),
+              attrs: {
+                href: projet.lienDepot,
+                target: '_blank',
+                rel: 'noopener noreferrer'
+              }
+            })
+          ])
+        ])
+      ]
+    );
+  }
+
+  /* ------------------------------ Contact ------------------------------ */
+
+  var LONGUEUR_MAX_MESSAGE = 2000;
+  var MOTIF_COURRIEL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+
+  function validerChamp(nom, valeur) {
+    var contenu = String(valeur).trim();
+    if (nom === 'nom') return contenu.length >= 2 ? '' : t('contact.erreurNom');
+    if (nom === 'courriel') {
+      return MOTIF_COURRIEL.test(contenu) ? '' : t('contact.erreurCourriel');
+    }
+    if (nom === 'sujet') return contenu.length >= 3 ? '' : t('contact.erreurSujet');
+    if (nom === 'message') {
+      return contenu.length >= 10 ? '' : t('contact.erreurMessage');
+    }
+    return '';
+  }
+
+  function champFormulaire(config) {
+    var identifiantErreur = config.identifiant + '-erreur';
+
+    var saisie = e(config.multiligne ? 'textarea' : 'input', {
+      classe: 'champ__saisie',
+      attrs: {
+        id: config.identifiant,
+        name: config.nom,
+        type: config.multiligne ? null : config.type || 'text',
+        rows: config.multiligne ? 7 : null,
+        maxlength: config.longueurMax,
+        autocomplete: config.autoComplete,
+        required: 'required',
+        'aria-invalid': 'false'
+      }
+    });
+
+    var zoneErreur = e('span', {
+      classe: 'champ__erreur',
+      attrs: { id: identifiantErreur, role: 'alert' }
+    });
+    zoneErreur.hidden = true;
+
+    function afficherErreur(message) {
+      if (message) {
+        zoneErreur.textContent = message;
+        zoneErreur.hidden = false;
+        saisie.setAttribute('aria-invalid', 'true');
+        saisie.setAttribute('aria-describedby', identifiantErreur);
+        saisie.classList.add('champ__saisie--invalide');
+      } else {
+        zoneErreur.textContent = '';
+        zoneErreur.hidden = true;
+        saisie.setAttribute('aria-invalid', 'false');
+        saisie.removeAttribute('aria-describedby');
+        saisie.classList.remove('champ__saisie--invalide');
+      }
+    }
+
+    saisie.addEventListener('blur', function () {
+      afficherErreur(validerChamp(config.nom, saisie.value));
+    });
+    saisie.addEventListener('input', function () {
+      if (!zoneErreur.hidden) {
+        afficherErreur(validerChamp(config.nom, saisie.value));
+      }
+      if (config.surSaisie) config.surSaisie(saisie.value);
+    });
+
+    var libelle = e('label', {
+      classe: 'champ__libelle',
+      attrs: { for: config.identifiant }
+    });
+    libelle.appendChild(document.createTextNode(config.libelle));
+    libelle.appendChild(
+      e('span', {
+        classe: 'champ__mention',
+        texte: ' (' + t('contact.obligatoire') + ')'
+      })
+    );
+
+    var bloc = e('p', { classe: 'champ' }, [libelle, saisie, zoneErreur]);
+
+    return { bloc: bloc, saisie: saisie, afficherErreur: afficherErreur };
+  }
+
+  function pageContact() {
+    var zoneReponse = e('div', { attrs: { 'aria-live': 'polite' } });
+    var compteur = e('p', {
+      classe: 'formulaire__compteur',
+      texte: '0 / ' + LONGUEUR_MAX_MESSAGE + ' ' + t('contact.compteur'),
+      attrs: { 'aria-live': 'polite' }
+    });
+
+    var champs = [
+      champFormulaire({
+        identifiant: 'champ-nom',
+        nom: 'nom',
+        libelle: t('contact.nom'),
+        autoComplete: 'name',
+        longueurMax: 80
+      }),
+      champFormulaire({
+        identifiant: 'champ-courriel',
+        nom: 'courriel',
+        type: 'email',
+        libelle: t('contact.courriel'),
+        autoComplete: 'email',
+        longueurMax: 120
+      }),
+      champFormulaire({
+        identifiant: 'champ-sujet',
+        nom: 'sujet',
+        libelle: t('contact.sujet'),
+        longueurMax: 120
+      }),
+      champFormulaire({
+        identifiant: 'champ-message',
+        nom: 'message',
+        libelle: t('contact.message'),
+        multiligne: true,
+        longueurMax: LONGUEUR_MAX_MESSAGE,
+        surSaisie: function (valeur) {
+          compteur.textContent =
+            valeur.length + ' / ' + LONGUEUR_MAX_MESSAGE + ' ' + t('contact.compteur');
+        }
+      })
+    ];
+
+    var bouton = e('button', {
+      classe: 'bouton bouton--principal',
+      texte: t('contact.envoyer'),
+      attrs: { type: 'submit' }
+    });
+
+    var formulaire = e(
+      'form',
+      { classe: 'formulaire', attrs: { novalidate: 'novalidate' } },
+      champs
+        .map(function (champ) {
+          return champ.bloc;
+        })
+        .concat([compteur, e('p', { classe: 'formulaire__actions' }, [bouton])])
+    );
+
+    formulaire.addEventListener('submit', function (evenement) {
+      evenement.preventDefault();
+      vider(zoneReponse);
+
+      var valeurs = {};
+      var premierInvalide = null;
+
+      champs.forEach(function (champ) {
+        var nom = champ.saisie.getAttribute('name');
+        valeurs[nom] = champ.saisie.value;
+        var message = validerChamp(nom, champ.saisie.value);
+        champ.afficherErreur(message);
+        if (message && !premierInvalide) premierInvalide = champ.saisie;
+      });
+
+      if (premierInvalide) {
+        premierInvalide.focus();
+        return;
+      }
+
+      // En mode fichier, aucun serveur Express n'ecoute : on montre la charge
+      // utile qui serait transmise a POST /api/contact dans le vrai projet.
+      var apercu = JSON.stringify(valeurs, null, 2);
+
+      zoneReponse.appendChild(
+        e('div', { classe: 'alerte alerte--succes', attrs: { role: 'status' } }, [
+          e('p', {
+            classe: 'alerte__texte',
+            texte:
+              etat.langue === 'fr'
+                ? 'Validation cote client reussie.'
+                : 'Client-side validation passed.'
+          }),
+          e('p', {
+            texte:
+              etat.langue === 'fr'
+                ? 'Mode demo : aucun serveur Express n’ecoute. Dans le projet React, cette charge utile serait envoyee en POST vers /api/contact, revalidee, puis ajoutee a messages.json.'
+                : 'Demo mode: no Express server is listening. In the React project this payload would be POSTed to /api/contact, revalidated, then appended to messages.json.'
+          }),
+          e('pre', {
+            texte: apercu,
+            attrs: {
+              style:
+                'background:rgba(0,0,0,0.06);padding:8px;border-radius:6px;overflow:auto;font-size:0.8rem;margin:0;'
+            }
+          })
+        ])
+      );
+
+      champs.forEach(function (champ) {
+        champ.saisie.value = '';
+      });
+      compteur.textContent =
+        '0 / ' + LONGUEUR_MAX_MESSAGE + ' ' + t('contact.compteur');
+    });
+
+    return e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-contact' } },
+      [
+        e('div', { classe: 'conteneur conteneur--etroit' }, [
+          e('h1', {
+            classe: 'section__titre',
+            texte: t('contact.titre'),
+            attrs: { id: 'titre-contact' }
+          }),
+          e('p', { classe: 'section__introduction', texte: t('contact.intro') }),
+          zoneReponse,
+          formulaire
+        ])
+      ]
+    );
+  }
+
+  /* ------------------------------- 404 --------------------------------- */
+
+  function pageIntrouvable() {
+    return e(
+      'section',
+      { classe: 'section', attrs: { 'aria-labelledby': 'titre-404' } },
+      [
+        e('div', { classe: 'conteneur conteneur--etroit' }, [
+          e('p', {
+            classe: 'code-erreur',
+            texte: '404',
+            attrs: { 'aria-hidden': 'true' }
+          }),
+          e('h1', {
+            classe: 'section__titre',
+            texte: t('nonTrouvee.titre'),
+            attrs: { id: 'titre-404' }
+          }),
+          e('p', {
+            classe: 'section__introduction',
+            texte: t('nonTrouvee.texte')
+          }),
+          e('p', {}, [
+            e('a', {
+              classe: 'bouton bouton--principal',
+              texte: t('nonTrouvee.retour'),
+              attrs: { href: '#/' }
+            })
+          ])
+        ])
+      ]
+    );
+  }
+
+  /* --------------------------- Bandeau demo ---------------------------- */
+
+  function bandeauDemo() {
+    var barre = e('div', { classe: 'bandeau-demo' }, [
+      e('div', { classe: 'conteneur bandeau-demo__interieur' }, [
+        e('strong', { texte: 'Aperçu de démonstration' }),
+        e('span', {
+          texte:
+            ' — fichier unique en JavaScript natif, sans React ni serveur. ' +
+            'Le livrable du projet est l’application du dossier ' +
+            'portfolio-log3500/ (npm install, puis npm run dev). ' +
+            'Ici les adresses utilisent un fragment (#/equipe) et le formulaire ' +
+            'n’atteint aucun serveur.'
+        })
+      ])
+    ]);
+    return barre;
+  }
+
+  /* ------------------------------- Rendu ------------------------------- */
+
+  function rendre() {
+    var racine = document.getElementById('racine');
+    vider(racine);
+
+    var route = routeCourante();
+
+    var contenu;
+    if (route.nom === 'accueil') contenu = pageAccueil();
+    else if (route.nom === 'equipe') contenu = pageEquipe();
+    else if (route.nom === 'projets') contenu = pageProjets();
+    else if (route.nom === 'detail') contenu = pageDetail(route.identifiant);
+    else if (route.nom === 'contact') contenu = pageContact();
+    else contenu = pageIntrouvable();
+
+    var titres = {
+      accueil: t('nav.accueil'),
+      equipe: t('nav.equipe'),
+      projets: t('nav.projets'),
+      detail: t('nav.projets'),
+      contact: t('nav.contact'),
+      introuvable: t('nonTrouvee.titre')
+    };
+    document.title = titres[route.nom] + ' | ' + t('entete.titre');
+
+    var lienEvitement = e('a', {
+      classe: 'lien-evitement',
+      texte: t('nav.evitement'),
+      attrs: { href: '#contenu-principal' }
+    });
+
+    var principal = e('main', {
+      classe: 'contenu-principal',
+      attrs: { id: 'contenu-principal', tabindex: '-1' }
+    });
+    principal.appendChild(contenu);
+
+    var enveloppe = e('div', { classe: 'enveloppe-application' }, [
+      lienEvitement,
+      bandeauDemo(),
+      construireEntete(),
+      principal,
+      construirePied()
+    ]);
+
+    racine.appendChild(enveloppe);
+  }
+
+  /* --------------------------- Initialisation -------------------------- */
+
+  try {
+    var preferenceSysteme = window.matchMedia('(prefers-color-scheme: dark)');
+    etat.theme = preferenceSysteme.matches ? 'sombre' : 'clair';
+  } catch (exception) {
+    etat.theme = 'clair';
+  }
+
+  document.documentElement.setAttribute('data-theme', etat.theme);
+  document.documentElement.setAttribute('lang', etat.langue);
+
+  window.addEventListener('hashchange', function () {
+    etat.menuOuvert = false;
+    rendre();
+    var principal = document.getElementById('contenu-principal');
+    if (principal) principal.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  rendre();
+
+  if (MODE_FICHIER) {
+    console.info(
+      'Portfolio LOG3500 — aperçu de démonstration ouvert en protocole file://. ' +
+        'Le projet React se lance avec : npm install puis npm run dev.'
+    );
+  }
+})();
+
+</script>
+</body>
+</html>

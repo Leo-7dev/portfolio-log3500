@@ -1,0 +1,137 @@
+/* ==========================================================================
+   base.css — Reinitialisation legere, typographie et regles d'accessibilite
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--police-principale);
+  font-size: var(--taille-base);
+  line-height: var(--hauteur-ligne);
+  color: var(--couleur-texte);
+  background-color: var(--couleur-fond);
+  transition: background-color var(--duree-transition) ease,
+    color var(--duree-transition) ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  margin: 0 0 var(--espace-s);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 1.2rem + 2.4vw, 2.75rem);
+}
+
+h2 {
+  font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.9rem);
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0 0 var(--espace-s);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--couleur-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--couleur-accent-appuye);
+}
+
+/* Indicateur de focus visible et contraste sur tout element interactif :
+   exigence d'accessibilite pour la navigation au clavier. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--couleur-focus);
+  outline-offset: 2px;
+  border-radius: var(--rayon-s);
+}
+
+/* Le contenu principal recoit le focus lors des changements de route ; on
+   masque le liseré par defaut du navigateur pour ce cas particulier. */
+main:focus {
+  outline: none;
+}
+
+/* Contenu reserve aux lecteurs d'ecran. */
+.sr-seulement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lien d'evitement : invisible jusqu'a la prise de focus au clavier. */
+.lien-evitement {
+  position: absolute;
+  top: -100px;
+  left: var(--espace-s);
+  z-index: 100;
+  padding: var(--espace-s) var(--espace-m);
+  background-color: var(--couleur-accent);
+  color: var(--couleur-accent-contraste);
+  border-radius: var(--rayon-s);
+  text-decoration: none;
+  transition: top var(--duree-transition) ease;
+}
+
+.lien-evitement:focus {
+  top: var(--espace-s);
+}
+
+/* Respect de la preference systeme de reduction des animations. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
