@@ -18,7 +18,7 @@ export const membres = [
     ensembleTaches: 'Ensemble de tâches 1',
     pseudoGitHub: 'filsleonel',
     courriel: 'leonel.charlesfils@gmail.com',
-    photo: '/membres/membre-1.svg',
+    photo: '/membres/membre-1.jpeg',
     bio: {
       fr: "Responsable de la structure HTML5 sémantique de tous les composants, de la mise en page responsive en CSS pur (Flexbox et Grid, sans framework) et de la conformité aux règles d'accessibilité numérique : contrastes, labels de formulaires et attributs ARIA. A également implémenté la bascule de styles visuels par variables CSS.",
       en: 'Responsible for the semantic HTML5 structure of every component, the responsive layout in pure CSS (Flexbox and Grid, no framework) and compliance with digital accessibility rules: contrast, form labels and ARIA attributes. Also implemented the visual theme switch through CSS variables.'
@@ -27,7 +27,7 @@ export const membres = [
   },
   {
     id: 'membre-2',
-    nom: 'Prénom Nom (membre 2)',
+    nom: 'Weslay Olibrice',
     role: {
       fr: 'Architecture client, composants et routage React',
       en: 'Client architecture, components and React routing'
@@ -35,7 +35,7 @@ export const membres = [
     ensembleTaches: 'Ensemble de tâches 2',
     pseudoGitHub: 'facebook',
     courriel: 'membre2@exemple.ht',
-    photo: '/membres/membre-2.svg',
+    photo: '/membres/membre-2.jpeg',
     bio: {
       fr: "A initialisé l'application avec Vite et défini l'arborescence des répertoires. A programmé et empaqueté l'ensemble des composants graphiques (cartes, menus, boutons), configuré le routeur React Router v6 et développé la validation dynamique côté client du formulaire de contact.",
       en: 'Initialised the application with Vite and defined the directory tree. Built and packaged all graphical components (cards, menus, buttons), configured the React Router v6 router and developed the dynamic client-side validation of the contact form.'
@@ -44,7 +44,7 @@ export const membres = [
   },
   {
     id: 'membre-3',
-    nom: 'Prénom Nom (membre 3)',
+    nom: 'Adley Jean-Baptiste',
     role: {
       fr: 'Développement serveur, interconnexion API et DevOps',
       en: 'Server development, API integration and DevOps'
@@ -52,7 +52,7 @@ export const membres = [
     ensembleTaches: 'Ensemble de tâches 3',
     pseudoGitHub: 'expressjs',
     courriel: 'membre3@exemple.ht',
-    photo: '/membres/membre-3.svg',
+    photo: '/membres/membre-3.jpeg',
     bio: {
       fr: "A programmé le serveur d'application Node.js/Express, créé la route POST /api/contact et géré la persistance des messages dans un fichier JSON local. Assure la gestion du dépôt Git (résolution des conflits, revues de code, fusions) et le déploiement continu sur Railway.",
       en: 'Built the Node.js/Express application server, created the POST /api/contact route and handled message persistence in a local JSON file. Manages the Git repository (conflict resolution, code reviews, merges) and continuous deployment on Railway.'
