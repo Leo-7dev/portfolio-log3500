@@ -1,12 +1,22 @@
 /**
  * Fiches des membres de l'equipe.
+ * LOG3500 - Projet de session - ISTEAH - Ete 2026
  *
- * >>> A PERSONNALISER AVANT LA REMISE <<<
- * Remplacez les noms, les biographies, les identifiants GitHub et les photos.
- * Le champ « pseudoGitHub » sert a interroger l'API REST publique de GitHub
- * (https://api.github.com/users/<pseudo>) pour afficher les statistiques reelles.
- * Le champ « photo » pointe vers un fichier place dans le dossier public/.
+ * >>> IL RESTE DEUX VALEURS A COMPLETER <
+ * Les constantes PSEUDO_MEMBRE_2 et PSEUDO_MEMBRE_3 doivent recevoir les
+ * identifiants GitHub reels de Weslay et d'Adley. Ce sont eux qui alimentent
+ * l'appel a l'API REST publique de GitHub sur la page Equipe. Tant qu'ils sont
+ * vides, le bloc de statistiques ne s'affiche pas pour le membre concerne
+ * (aucune erreur n'est montree a l'utilisateur).
  */
+
+// ---------------------------------------------------------------------------
+// Identifiants GitHub de l'equipe
+// ---------------------------------------------------------------------------
+const PSEUDO_MEMBRE_1 = 'Leo-7dev';
+const PSEUDO_MEMBRE_2 = ''; // <-- pseudo GitHub de Weslay Olibrice
+const PSEUDO_MEMBRE_3 = ''; // <-- pseudo GitHub d'Adley Jean Baptiste
+
 export const membres = [
   {
     id: 'membre-1',
@@ -16,14 +26,20 @@ export const membres = [
       en: 'Semantic integration, visual identity and accessibility'
     },
     ensembleTaches: 'Ensemble de tâches 1',
-    pseudoGitHub: 'filsleonel',
+    pseudoGitHub: PSEUDO_MEMBRE_1,
     courriel: 'leonel.charlesfils@gmail.com',
     photo: '/membres/membre-1.jpeg',
     bio: {
-      fr: "Responsable de la structure HTML5 sémantique de tous les composants, de la mise en page responsive en CSS pur (Flexbox et Grid, sans framework) et de la conformité aux règles d'accessibilité numérique : contrastes, labels de formulaires et attributs ARIA. A également implémenté la bascule de styles visuels par variables CSS.",
-      en: 'Responsible for the semantic HTML5 structure of every component, the responsive layout in pure CSS (Flexbox and Grid, no framework) and compliance with digital accessibility rules: contrast, form labels and ARIA attributes. Also implemented the visual theme switch through CSS variables.'
+      fr: "Responsable de la structure HTML5 sémantique de tous les composants, de la mise en page responsive en CSS pur (Flexbox et Grid, sans framework) et de la conformité aux règles d'accessibilité numérique : contrastes de couleurs, labels de formulaires et attributs ARIA. A également implémenté la bascule de styles visuels par variables CSS entre le mode clair et le mode sombre.",
+      en: 'Responsible for the semantic HTML5 structure of every component, the responsive layout in pure CSS (Flexbox and Grid, no framework) and compliance with digital accessibility rules: colour contrast, form labels and ARIA attributes. Also implemented the visual theme switch between light and dark mode through CSS variables.'
     },
-    competences: ['HTML5 sémantique', 'CSS Grid', 'Flexbox', 'WCAG / ARIA', 'Design responsive']
+    competences: [
+      'HTML5 sémantique',
+      'CSS Grid',
+      'Flexbox',
+      'WCAG / ARIA',
+      'Design responsive'
+    ]
   },
   {
     id: 'membre-2',
@@ -33,29 +49,35 @@ export const membres = [
       en: 'Client architecture, components and React routing'
     },
     ensembleTaches: 'Ensemble de tâches 2',
-    pseudoGitHub: 'facebook',
-    courriel: 'membre2@exemple.ht',
+    pseudoGitHub: PSEUDO_MEMBRE_2,
+    courriel: '',
     photo: '/membres/membre-2.jpeg',
     bio: {
-      fr: "A initialisé l'application avec Vite et défini l'arborescence des répertoires. A programmé et empaqueté l'ensemble des composants graphiques (cartes, menus, boutons), configuré le routeur React Router v6 et développé la validation dynamique côté client du formulaire de contact.",
-      en: 'Initialised the application with Vite and defined the directory tree. Built and packaged all graphical components (cards, menus, buttons), configured the React Router v6 router and developed the dynamic client-side validation of the contact form.'
+      fr: "A initialisé l'application avec l'outil Vite et défini l'arborescence des répertoires du projet. A programmé et empaqueté l'ensemble des composants graphiques de l'interface — cartes de présentation, menus, boutons —, configuré le routeur React Router v6 et développé la validation dynamique côté client du formulaire de contact.",
+      en: 'Initialised the application with Vite and defined the project directory tree. Built and packaged every graphical component of the interface — presentation cards, menus, buttons —, configured the React Router v6 router and developed the dynamic client-side validation of the contact form.'
     },
-    competences: ['React 18', 'Vite', 'React Router v6', 'Hooks', 'Composants réutilisables']
+    competences: [
+      'React 18',
+      'Vite',
+      'React Router v6',
+      'Hooks',
+      'Composants réutilisables'
+    ]
   },
   {
     id: 'membre-3',
-    nom: 'Adley Jean-Baptiste',
+    nom: 'Adley Jean Baptiste',
     role: {
       fr: 'Développement serveur, interconnexion API et DevOps',
       en: 'Server development, API integration and DevOps'
     },
     ensembleTaches: 'Ensemble de tâches 3',
-    pseudoGitHub: 'expressjs',
-    courriel: 'membre3@exemple.ht',
+    pseudoGitHub: PSEUDO_MEMBRE_3,
+    courriel: '',
     photo: '/membres/membre-3.jpeg',
     bio: {
-      fr: "A programmé le serveur d'application Node.js/Express, créé la route POST /api/contact et géré la persistance des messages dans un fichier JSON local. Assure la gestion du dépôt Git (résolution des conflits, revues de code, fusions) et le déploiement continu sur Railway.",
-      en: 'Built the Node.js/Express application server, created the POST /api/contact route and handled message persistence in a local JSON file. Manages the Git repository (conflict resolution, code reviews, merges) and continuous deployment on Railway.'
+      fr: "A programmé le serveur d'application Node.js/Express, créé la route POST /api/contact et géré la persistance des messages reçus dans un fichier JSON local. Assure la gestion du dépôt Git — résolution des conflits, revues de code, fusions — ainsi que le déploiement continu de l'application sur la plateforme Railway.",
+      en: 'Built the Node.js/Express application server, created the POST /api/contact route and handled persistence of incoming messages in a local JSON file. Manages the Git repository — conflict resolution, code reviews, merges — as well as the continuous deployment of the application on the Railway platform.'
     },
     competences: ['Node.js', 'Express', 'API REST', 'Git / GitHub', 'Railway / CI-CD']
   }

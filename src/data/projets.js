@@ -2,48 +2,53 @@
  * Catalogue des realisations affichees dans la galerie filtrable.
  * Les devoirs 1 et 2 du cours y figurent, comme l'exige l'enonce, aux cotes
  * du projet de session.
- *
- * >>> A PERSONNALISER : liens du depot, captures et descriptions reelles. <<<
+ * LOG3500 - ISTEAH - Ete 2026 - equipe Charles / Olibrice / Jean Baptiste.
  */
 export const projets = [
   {
     id: 'devoir-1',
-    titre: { fr: 'Devoir 1 — Site statique sémantique', en: 'Assignment 1 — Semantic static site' },
+    titre: {
+      fr: 'Devoir 1 — Page d’inscription HTML5 et CSS3',
+      en: 'Assignment 1 — HTML5 and CSS3 registration page'
+    },
     resume: {
-      fr: 'Site multipage en HTML5 et CSS3 pur, validé par le W3C et adapté aux écrans mobiles.',
-      en: 'Multi-page site in pure HTML5 and CSS3, W3C-validated and adapted to mobile screens.'
+      fr: 'Formulaire d’inscription en HTML5 sémantique et CSS3 pur, sans framework ni bibliothèque tierce.',
+      en: 'Registration form in semantic HTML5 and pure CSS3, without any framework or third-party library.'
     },
     contexte: {
-      fr: "Premier devoir du cours LOG3500. L'objectif était de maîtriser la structure sémantique d'un document HTML5 et la mise en page en CSS pur, sans recours à un framework. Chaque page respecte la hiérarchie des titres et les repères de navigation.",
-      en: 'First assignment of the LOG3500 course. The goal was to master the semantic structure of an HTML5 document and pure CSS layout, without resorting to a framework. Every page respects heading hierarchy and navigation landmarks.'
+      fr: "Premier devoir du cours LOG3500. L'objectif était de maîtriser la structure sémantique d'un document HTML5 et la mise en page en CSS pur : hiérarchie des titres, repères de navigation, labels de formulaire correctement associés à leurs champs et mise en page adaptée aux écrans mobiles.",
+      en: 'First assignment of the LOG3500 course. The goal was to master the semantic structure of an HTML5 document and pure CSS layout: heading hierarchy, navigation landmarks, form labels properly associated with their fields and a layout adapted to mobile screens.'
     },
     contribution: {
-      fr: 'Rédaction du balisage sémantique, conception de la grille responsive et vérification des contrastes de couleurs.',
-      en: 'Semantic markup, responsive grid design and colour-contrast verification.'
+      fr: 'Rédaction du balisage sémantique, conception de la mise en page responsive et vérification des contrastes de couleurs.',
+      en: 'Semantic markup, responsive layout design and colour-contrast verification.'
     },
     technologies: ['HTML5', 'CSS3', 'Accessibilité'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/devoir-1',
+    lienDepot: 'https://github.com/Leo-7dev/devoir1-inscription',
     couleur: '#2563eb'
   },
   {
     id: 'devoir-2',
-    titre: { fr: 'Devoir 2 — Interactivité JavaScript', en: 'Assignment 2 — JavaScript interactivity' },
+    titre: {
+      fr: 'Devoir 2 — Atlas mondial',
+      en: 'Assignment 2 — World Atlas'
+    },
     resume: {
-      fr: 'Manipulation du DOM, gestion des événements et validation de formulaires en JavaScript natif.',
-      en: 'DOM manipulation, event handling and form validation in vanilla JavaScript.'
+      fr: 'Application interactive affichant la fiche d’identité d’un pays à partir de l’API REST Countries.',
+      en: 'Interactive application displaying a country profile card fetched from the REST Countries API.'
     },
     contexte: {
-      fr: "Deuxième devoir du cours. L'application ajoute une couche d'interactivité au site du devoir 1 : filtrage de contenus, validation de saisies et affichage conditionnel, sans bibliothèque tierce.",
-      en: 'Second assignment. The application adds an interactivity layer to the assignment 1 site: content filtering, input validation and conditional display, without third-party libraries.'
+      fr: "Deuxième devoir du cours. L'utilisateur recherche un pays par un formulaire ; l'application interroge la version 3.1 de l'API publique REST Countries avec fetch et async/await, puis compose dynamiquement une carte d'identité : drapeau, capitale, population formatée, région, monnaies et langues. La mise en page emploie Flexbox, CSS Grid et des requêtes média ; un indicateur de chargement animé et la gestion des erreurs réseau complètent l'expérience.",
+      en: 'Second assignment of the course. The user searches for a country through a form; the application queries version 3.1 of the public REST Countries API with fetch and async/await, then dynamically composes a profile card: flag, capital, formatted population, region, currencies and languages. The layout uses Flexbox, CSS Grid and media queries; an animated loading indicator and network error handling complete the experience.'
     },
     contribution: {
-      fr: 'Écriture des gestionnaires d’événements, des fonctions de validation et de la logique de filtrage.',
-      en: 'Event handlers, validation functions and filtering logic.'
+      fr: 'Consommation asynchrone de l’API, injection des données par textContent uniquement — aucune insertion de HTML brut, donc aucun risque d’injection —, validation accessible du formulaire et conformité W3C vérifiée.',
+      en: 'Asynchronous API consumption, data injection through textContent only — no raw HTML insertion, hence no injection risk —, accessible form validation and verified W3C compliance.'
     },
-    technologies: ['JavaScript ES2022', 'DOM', 'HTML5'],
+    technologies: ['JavaScript ES2022', 'API REST', 'HTML5', 'CSS3', 'Accessibilité'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/devoir-2',
+    lienDepot: 'https://github.com/Leo-7dev/atlas-mondial',
     couleur: '#7c3aed'
   },
   {
@@ -66,7 +71,7 @@ export const projets = [
     },
     technologies: ['React 18', 'Vite', 'React Router v6', 'Node.js', 'Express', 'Railway'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/portfolio-log3500',
+    lienDepot: 'https://github.com/Leo-7dev/portfolio-log3500',
     couleur: '#0891b2'
   },
   {
@@ -89,7 +94,7 @@ export const projets = [
     },
     technologies: ['API REST GitHub', 'JavaScript ES2022', 'React 18'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/portfolio-log3500',
+    lienDepot: 'https://github.com/Leo-7dev/portfolio-log3500',
     couleur: '#059669'
   },
   {
@@ -112,7 +117,7 @@ export const projets = [
     },
     technologies: ['Node.js', 'Express', 'API REST'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/portfolio-log3500',
+    lienDepot: 'https://github.com/Leo-7dev/portfolio-log3500',
     couleur: '#d97706'
   },
   {
@@ -135,7 +140,7 @@ export const projets = [
     },
     technologies: ['Railway', 'Git / GitHub', 'Node.js'],
     annee: 2026,
-    lienDepot: 'https://github.com/ORGANISATION/portfolio-log3500',
+    lienDepot: 'https://github.com/Leo-7dev/portfolio-log3500',
     couleur: '#be123c'
   }
 ];
